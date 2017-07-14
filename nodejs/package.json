@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "DucTruong",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongoose": "^4.11.2",
+    "nodemon": "^1.11.0"
+  }
+}
