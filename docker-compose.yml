@@ -15,10 +15,10 @@ services:
   api-gateway:
     build: ./api-gateway
     depends_on:
-      - api-gateway-mongo
-  api-gateway-mongo:
+      - mongo
+  mongo:
     image: mongo:3.4
     ports:
       - "27017:27017"
     volumes:
-      - ./api-gateway-mongo:/data/db
+      - ./mongo:/data/db

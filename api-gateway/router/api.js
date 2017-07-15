@@ -3,14 +3,15 @@
 var express     = require('express'),
     router      = express.Router();
 
-var userRoute   = require('./user');
+var userRouter  = require('./user');
+var postRouter  = require('./post');
 
-// GET / route
 router.get('/', function(req, res) {
   return res.status(301).redirect('/');
 });
 
-router.use('/users', userRoute);
+router.use('/users', userRouter);
+router.use('/posts', postRouter);
 
 // export our router middleware
 module.exports = router;

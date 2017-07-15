@@ -1,4 +1,4 @@
-FROM node:8.1.4
+FROM mongo-express:0.40.0
 RUN mkdir /api
 WORKDIR /api
 COPY package.json /api

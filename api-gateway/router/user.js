@@ -1,10 +1,16 @@
 'use strict';
 
 var express     = require('express'),
-    users      = express.Router();
+    userRoutes  = express.Router(),
+    db          = require('../common/db'),
+    userSchema  = require('../schema/user');
 
-users.get('/', function(req, res) {
-    return res.status(200).send('GET /api/users received!');
+var User        = db.model('users', userSchema);
+
+userRoutes.get('/', function(req, res) {
+    User.find({}, function (err, docs) {
+        res.json(docs);
+    });
 });
 
-module.exports = users;
+module.exports = userRoutes;
