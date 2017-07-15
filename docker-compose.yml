@@ -1,24 +1,24 @@
 version: '3'
 services:
   server-proxy:
-    build: ./nginx
+    build: ./server-proxy
     ports:
       - "3000:80"
     depends_on:
-      - api
+      - api-gateway
   web:
-    build: ./angular
+    build: ./web
     ports:
       - "80:80"
     depends_on:
-      - api
-  api:
-    build: ./nodejs
+      - api-gateway
+  api-gateway:
+    build: ./api-gateway
     depends_on:
-      - mongo
-  mongo:
+      - api-gateway-mongo
+  api-gateway-mongo:
     image: mongo:3.4
     ports:
       - "27017:27017"
     volumes:
-      - ./mongodb:/data/db
+      - ./api-gateway-mongo:/data/db
