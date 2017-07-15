@@ -3,13 +3,15 @@
 var express     = require('express'),
     router      = express.Router();
 
-var userRouter  = require('./user');
-var postRouter  = require('./post');
+var authRouter  = require('./auth'),
+    userRouter  = require('./user'),
+    postRouter  = require('./post');
 
 router.get('/', function(req, res) {
   return res.status(301).redirect('/');
 });
 
+router.use('/auth', authRouter);
 router.use('/users', userRouter);
 router.use('/posts', postRouter);
 

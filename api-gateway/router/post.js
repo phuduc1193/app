@@ -1,14 +1,12 @@
 'use strict';
 
-var express     = require('express'),
-    mongoose    = require('mongoose'),
-    posts       = express.Router();
+var express    = require('express'),
+    postRouter = express.Router(),
+    service    = require('../common/service'),
+    Post       = require('../schema/post');
 
-//DB setup
-mongoose.connect('mongodb://mongo:27017', { useMongoClient: true });
-
-posts.get('/', function(req, res) {
+postRouter.get('/', function(req, res) {
     return res.status(200).send('GET /api/posts received!');
 });
 
-module.exports = posts;
+module.exports = postRouter;

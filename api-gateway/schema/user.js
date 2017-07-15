@@ -1,8 +1,11 @@
+'user strict';
+
 var mongoose    = require('mongoose'),
     Schema      = mongoose.Schema,
-    BaseSchema  = require('../common/schema');
+    BaseSchema  = require('./base'),
+    db          = require('../common/db');
 
-var userSchema = new Schema({
+var UserSchema = new Schema({
   username: BaseSchema.uniqueIdentifier,
   primaryEmail: BaseSchema.email,
   name:   BaseSchema.name,
@@ -13,4 +16,8 @@ var userSchema = new Schema({
   gender: BaseSchema.gender
 });
 
-module.exports = userSchema;
+module.exports = UserSchema;
+
+var User = db.model('users', UserSchema);
+
+module.exports = User;
