@@ -10,7 +10,9 @@ COPY . .
 
 COPY nginx/default.conf /etc/nginx/conf.d/
 
-RUN npm install \
+RUN npm i -g yarn
+RUN yarn \
+  && apm rebuild node-sass \
   && ng build --aot --prod \
   && rm -rf /usr/share/nginx/html/* \
   && mv ./dist/* /usr/share/nginx/html/ \

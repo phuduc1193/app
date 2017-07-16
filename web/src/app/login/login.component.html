@@ -1,0 +1,16 @@
+<md-card class="form-container-sm">
+  <md-card-title>
+    Welcome, let's log you in to see wonders !
+  </md-card-title>
+  <md-card-content class="text-center">
+    <form novalidate [formGroup]="form">
+      <md-input-container class="full-width input-lg" flex>
+        <input mdInput placeholder="Username" formControlName="username">
+      </md-input-container>
+      <md-input-container class="full-width input-lg" flex>
+        <input mdInput placeholder="Password" formControlName="password">
+      </md-input-container>
+    </form>
+    <button md-raised-button (click)="login()">Login</button>
+  </md-card-content>
+</md-card>

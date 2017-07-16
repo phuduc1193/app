@@ -1,10 +1,10 @@
-import { AngularPage } from './app.po';
+import { WebPage } from './app.po';
 
-describe('angular App', () => {
-  let page: AngularPage;
+describe('web App', () => {
+  let page: WebPage;
 
   beforeEach(() => {
-    page = new AngularPage();
+    page = new WebPage();
   });
 
   it('should display welcome message', () => {
