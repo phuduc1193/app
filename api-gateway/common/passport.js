@@ -7,13 +7,15 @@ var passport    = require('passport'),
     Auth        = require('../schema/auth');
 
 var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  console.log('payload received', jwt_payload);
-  Auth.findById(jwt_payload.id, function(err, data) {
+  console.log('Payload received: ', jwt_payload);
+  Auth.findById(jwt_payload.sub, function(err, data) {
     if (err) {
       return next(err, false);
     }
     if (data) {
-      next(null, data);
+      if (Date.now() <= jwt_payload.exp)
+        next(null, data);
+      next(null, false);
     } else {
       next(null, false);
     }

@@ -18,6 +18,12 @@ var service = {
       res.status(200).json(successResponseWithData(data));
     else
       res.status(404).json(noDataResponse());
+  },
+  jwtClaims: function (id) {
+    return {
+      sub: id.toString(),
+      exp: new Date(new Date().setDate(new Date().getDate() + 15)).getTime(),
+    }
   }
 }
 

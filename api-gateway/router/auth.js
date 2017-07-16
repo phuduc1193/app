@@ -5,6 +5,7 @@ var express     = require('express'),
     service     = require('../common/service'),
     db          = require('../common/db'),
     Auth        = require('../schema/auth'),
+    User        = require('../schema/user'),
     jwtOptions  = require('../common/jwt-options'),
     jwt         = require('jsonwebtoken'),
     bcrypt      = require('bcrypt-nodejs');
@@ -13,20 +14,19 @@ authRouter.post('/login', function (req, res, next) {
   if(!req.body.username || !req.body.password){
     return res.status(401).json({
       response: {
-        status: 401,
-        message: "Unauthorized.. Missing login info"
+        status: 40100,
+        message: "Missing login info"
       }
     });
   }
-  
   Auth.findOne({
     'username': req.body.username
   }, function (err, data) {
     if (err){
        return res.status(401).json({
         response: {
-          status: 401,
-          message: "Unauthorized.. Missing login info"
+          status: 40101,
+          message: "No username found"
         }
       });
     }
@@ -36,7 +36,7 @@ authRouter.post('/login', function (req, res, next) {
     bcrypt.compare(req.body.password, data.password, function (err, isSuccess) {
       if (isSuccess) {
         // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
-        var payload = {id: data._id.toString()};
+        var payload = service.jwtClaims(data._id);
         var token = jwt.sign(payload, jwtOptions.secretOrKey);
         res.status(200).json({
           response: {
@@ -48,8 +48,8 @@ authRouter.post('/login', function (req, res, next) {
       } else {
         return res.status(401).json({
           response: {
-            status: 401,
-            message: "Unauthorized.. Missing login info"
+            status: 40102,
+            message: "Wrong password"
           }
         });
       }
@@ -66,11 +66,14 @@ authRouter.post('/register', function (req, res, next) {
     user.save(function (err) {
       if (err)
         next();
+      var payload = service.jwtClaims(data._id);
+      var token = jwt.sign(payload, jwtOptions.secretOrKey);
       res.status(201).json({
         response: {
           status: 201,
           message: 'Successfully created'
-        }
+        },
+        token: token
       });
     });
   });

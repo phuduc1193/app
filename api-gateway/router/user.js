@@ -28,4 +28,12 @@ userRouter.post('/', passport.authenticate('jwt', { session: false }), function 
   
 });
 
+userRouter.put('/', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+  
+});
+
+userRouter.delete('/', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+  
+});
+
 module.exports = userRouter;
