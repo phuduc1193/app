@@ -1,21 +1,17 @@
 version: '3'
 services:
-  server-proxy:
-    build: ./server-proxy
-    ports:
-      - "3000:80"
-    depends_on:
-      - api-gateway
   web:
     build: ./web
     ports:
       - "80:80"
     depends_on:
-      - api-gateway
-  api-gateway:
+      - api
+  api:
     build: ./api-gateway
     depends_on:
       - mongo
+    ports:
+      - "3000:3000"
   mongo:
     image: mongo:3.4
     ports:
