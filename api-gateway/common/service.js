@@ -19,9 +19,9 @@ var service = {
     else
       res.status(404).json(noDataResponse());
   },
-  jwtClaims: function (id) {
+  jwtClaims: function (username) {
     return {
-      sub: id.toString(),
+      sub: username,
       exp: new Date(new Date().setDate(new Date().getDate() + 15)).getTime(),
     }
   }

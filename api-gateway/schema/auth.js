@@ -3,12 +3,15 @@
 var mongoose    = require('mongoose'),
     Schema      = mongoose.Schema,
     BaseSchema  = require('./base'),
+    validator   = require('mongoose-unique-validator'),
     db          = require('../common/db');
 
 var AuthSchema = new Schema({
   username: BaseSchema.uniqueIdentifier,
   password: String
 });
+
+AuthSchema.plugin(validator);
 
 module.exports = AuthSchema;
 

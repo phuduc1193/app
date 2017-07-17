@@ -1,9 +1,10 @@
 'user strict';
 
-var mongoose    = require('mongoose'),
-    Schema      = mongoose.Schema,
-    BaseSchema  = require('./base'),
-    db          = require('../common/db');
+var mongoose        = require('mongoose'),
+    Schema          = mongoose.Schema,
+    BaseSchema      = require('./base'),
+    validator       = require('mongoose-unique-validator'),
+    db              = require('../common/db');
 
 var UserSchema = new Schema({
   username: BaseSchema.uniqueIdentifier,
@@ -15,6 +16,8 @@ var UserSchema = new Schema({
   relations: [BaseSchema.relation],
   gender: BaseSchema.gender
 });
+
+UserSchema.plugin(validator);
 
 module.exports = UserSchema;
 
