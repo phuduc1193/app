@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class RegistrationComponent implements OnInit {
   message: String;
   form: FormGroup;
-  constructor(private _fb: FormBuilder, private _parent: AuthenticationComponent) { }
+  constructor(private _fb: FormBuilder, private _parent: AuthenticationComponent, private _http: Http) { }
 
   ngOnInit() {
     this.message = 'Registration';
@@ -39,7 +39,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   registration() {
-    console.log(this.form.controls.confirm.errors);
+    this._http.post(environment.apiUrl + 'auth/register', this.form.value)
+      .map(res => res.json())
+      .subscribe(result => console.log(result));
   }
 
   toggleState() {

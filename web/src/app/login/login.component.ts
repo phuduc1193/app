@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   message: String;
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _http: Http, private _parent: AuthenticationComponent) { }
+  constructor(private _fb: FormBuilder, private _parent: AuthenticationComponent, private _http: Http) { }
 
   ngOnInit() {
     this.message = "Welcome, let's log you in to see wonders !";
