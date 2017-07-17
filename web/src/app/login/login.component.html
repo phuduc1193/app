@@ -1,16 +1,24 @@
-<md-card class="form-container-sm">
+<md-card class="form-container-sm" style="z-index:10">
   <md-card-title>
-    Welcome, let's log you in to see wonders !
+    {{ message }}
   </md-card-title>
   <md-card-content class="text-center">
     <form novalidate [formGroup]="form">
       <md-input-container class="full-width input-lg" flex>
         <input mdInput placeholder="Username" formControlName="username">
       </md-input-container>
+      <control-message [control]="form.controls.username"></control-message>
+      
       <md-input-container class="full-width input-lg" flex>
         <input mdInput type="password" placeholder="Password" formControlName="password">
       </md-input-container>
+      <control-message [control]="form.controls.password"></control-message>
     </form>
-    <button md-raised-button (click)="login()">Login</button>
+    <table class="full-width">
+      <tr>
+        <td><button md-raised-button [disabled]="!form.valid" (click)="login()" color="accent">Login</button></td>
+        <td><button md-raised-button (click)="toggleState()">Register</button></td>
+      </tr>
+    </table>
   </md-card-content>
 </md-card>
