@@ -9,10 +9,15 @@ services:
   api:
     build: ./api-gateway
     depends_on:
-      - mongo
+      - api-db
     ports:
       - "3000:3000"
-  mongo:
+    links:
+      - api-db
+    environment:
+      DATABASE_URL: mongodb://api-db:27017
+      TOKEN_SECRET: qwert1234
+  api-db:
     image: mongo:3.4
-    ports:
-      - "27017:27017"
+    expose:
+      - "27017"

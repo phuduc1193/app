@@ -5,6 +5,6 @@ var passportJWT = require('passport-jwt'),
 
 var jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
-jwtOptions.secretOrKey = 'qwert1234';
+jwtOptions.secretOrKey = process.env.TOKEN_SECRET;
 
 module.exports = jwtOptions;
