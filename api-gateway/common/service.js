@@ -19,11 +19,20 @@ var service = {
     else
       res.status(404).json(noDataResponse());
   },
-  jwtClaims: function (username) {
+  jwtClaims: function (id) {
     return {
-      sub: username,
-      exp: new Date(new Date().setDate(new Date().getDate() + 15)).getTime(),
+      sub: id,
+      exp: (new Date(new Date().setDate(new Date().getDate() + 15)).getTime() / 1000 | 0),
     }
+  },
+  guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
   }
 }
 

@@ -16,6 +16,9 @@ export class AuthenticationComponent implements OnInit {
   }
 
   ngOnInit() {
+    for (var key in localStorage){
+      console.log(key)
+    }
   }
 
 }

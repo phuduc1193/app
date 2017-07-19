@@ -8,7 +8,8 @@ var mongoose    = require('mongoose'),
 
 var AuthSchema = new Schema({
   username: BaseSchema.uniqueIdentifier,
-  password: String
+  password: String,
+  token: String
 });
 
 AuthSchema.plugin(validator);
