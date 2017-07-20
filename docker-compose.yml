@@ -1,10 +1,12 @@
-version: '3'
+version: "3"
 services:
   web:
     build: ./web
+    depends_on:
+      - api
     ports:
       - "80:80"
-    depends_on:
+    links:
       - api
   api:
     build: ./api-gateway
@@ -17,7 +19,11 @@ services:
     environment:
       DATABASE_URL: mongodb://api-db:27017
       TOKEN_SECRET: qwert1234
+    volumes:
+      - ./api-gateway/:/api
   api-db:
     image: mongo:3.4
     expose:
       - "27017"
+    volumes:
+      - ./api-gateway/db/:/data/db/

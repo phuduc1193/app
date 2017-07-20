@@ -27,3 +27,4 @@
 /web/Thumbs.db
 
 /api-gateway/node_modules
+/api-gateway/db/*
