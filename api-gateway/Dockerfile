@@ -1,11 +1,7 @@
-FROM mongo-express:0.40.0
-RUN mkdir /api
-WORKDIR /api
-COPY package.json /api
-RUN npm install
+FROM nginx:1.13-alpine
 
-COPY . /api
+COPY default.conf /etc/nginx/conf.d/
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
