@@ -28,6 +28,13 @@ body {
 .form-container-sm {
   width: 500px;
   margin: 120px auto;
+
+  &.register-form, &.login-form {
+    z-index:10;
+    position:fixed;
+    left: 50%;
+    margin-left: -274px;
+  }
 }
 
 .form-container-md {

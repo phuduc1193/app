@@ -3,21 +3,26 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { environment } from '../../environments/environment';
 import { AuthenticationComponent } from '../authentication/authentication.component';
 import { ValidationService } from '../validation.service';
+import { LoginStateService } from '../login-state.service';
+import { flyInOut } from '../animations';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-login',
+  animations: [flyInOut],
   templateUrl: './login.component.html'
 })
 
 export class LoginComponent implements OnInit {
+  show: boolean;
   message: String;
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _parent: AuthenticationComponent, private _http: Http) { }
+  constructor(private _fb: FormBuilder, private _loginStateService: LoginStateService, private _http: Http) { }
 
   ngOnInit() {
+    this._loginStateService.currentLoginState.subscribe(state => this.show = state);
     this.message = "Welcome, let's log you in to see wonders !";
     this.form =  this._fb.group({
       username: ['', [Validators.required, ValidationService.usernameValidator]],
@@ -31,7 +36,7 @@ export class LoginComponent implements OnInit {
       .subscribe(result => console.log(result));
   }
 
-  toggleState() {
-    this._parent.isLogin = !this._parent.isLogin;
+  toggleLoginState() {
+    this._loginStateService.setLoginState(false);
   }
 }

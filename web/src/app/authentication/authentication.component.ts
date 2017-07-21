@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-authentication',
-  template: `<app-login *ngIf="isLogin; else registrationForm"></app-login>
-<ng-template #registrationForm><app-registration></app-registration></ng-template>`
+  template: `<app-login></app-login>
+            <app-registration></app-registration>`
 })
 
 export class AuthenticationComponent implements OnInit {
-  renderLogin: boolean;
-
-  @Input() isLogin = true;
 
   constructor() {
   }

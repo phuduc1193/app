@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../environments/environment';
-import { AuthenticationComponent } from '../authentication/authentication.component';
 import { ValidationService } from '../validation.service';
+import { LoginStateService } from '../login-state.service';
+import { flyInOut } from '../animations';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-registration',
+  animations: [flyInOut],
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit {
+  show: boolean;
   message: String;
   form: FormGroup;
-  constructor(private _fb: FormBuilder, private _parent: AuthenticationComponent, private _http: Http) { }
+  constructor(private _fb: FormBuilder, private _loginStateService: LoginStateService, private _http: Http) { }
 
   ngOnInit() {
+    this._loginStateService.currentLoginState.subscribe(state => this.show = !state);
     this.message = 'Registration';
     this.form =  this._fb.group({
       username: ['', [Validators.required, ValidationService.usernameValidator]],
@@ -44,7 +48,7 @@ export class RegistrationComponent implements OnInit {
       .subscribe(result => console.log(result));
   }
 
-  toggleState() {
-    this._parent.isLogin = !this._parent.isLogin;
+  toggleLoginState() {
+    this._loginStateService.setLoginState(true);
   }
 }

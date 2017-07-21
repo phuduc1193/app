@@ -1,4 +1,4 @@
-<md-card class="form-container-sm" style="z-index:10">
+<md-card *ngIf="show" class="form-container-sm register-form" [@flyInOut]>
   <md-card-title>
     {{ message }}
   </md-card-title>
@@ -22,7 +22,7 @@
     <table class="full-width">
       <tr>
         <td><button md-raised-button [disabled]="!form.valid" (click)="registration()" color="primary">Register</button></td>
-        <td><button md-raised-button (click)="toggleState()">Cancel</button></td>
+        <td><button md-raised-button (click)="toggleLoginState()">Cancel</button></td>
       </tr>
     </table>
   </md-card-content>

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { ValidationService } from './validation.service';
+import { LoginStateService } from './login-state.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -29,7 +30,7 @@ import { BubblesBGComponent } from './bubbles-bg/bubbles-bg.component';
     MdButtonModule, MdCardModule, MdIconModule, MdInputModule,
     HttpModule
   ],
-  providers: [ ValidationService ],
+  providers: [ ValidationService, LoginStateService ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }
