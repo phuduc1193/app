@@ -38,8 +38,13 @@ authRouter.post('/login', function (req, res, next) {
 
     bcrypt.compare(req.body.password, data.password, function (err, isSuccess) {
       if (isSuccess) {
-        // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
         var payload = service.jwtClaims(data._id);
+        User.findOne({'authId': data._id}, function (err, user_data) {
+          if (user_data){
+            payload.name = user_data.name.givenName + " " + user_data.name.familyName;
+          }
+        })
+
         var token = jwt.sign(payload, jwtOptions.secretOrKey);
         return res.status(200).json({
           status: {

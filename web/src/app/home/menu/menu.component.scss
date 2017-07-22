@@ -31,8 +31,14 @@
   height: 30px;
 }
 
+div.cdk-overlay-pane {
+    right: 0;
+}
+
 .top-menu .mat-button {
   font-size: 20px;
+  height: 65px;
+  top: -2px;
 }
 
 hr.menu-separator{

@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './authentication/auth.service';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Component({
   selector: 'app-root',
   template: `<flash-messages></flash-messages>
-<app-authentication *ngIf="!goodToken"></app-authentication>
+<app-authentication *ngIf="!tokenNotExpired"></app-authentication>
 <app-home></app-home>`,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  goodToken: boolean;
+  tokenNotExpired: boolean;
 
-  constructor(private _authService: AuthService) { this.goodToken = false; }
+  constructor(private _authService: AuthService) { this.tokenNotExpired = tokenNotExpired(); }
 
   ngOnInit () {
-    this._authService.checkToken().subscribe(res => this.handleResponse(res));
+    this.checkTokenExpire();
+  }
+
+  checkTokenExpire () {
+    if (tokenNotExpired()){
+      this.tokenNotExpired = false;
+      this._authService.setLoginState(2);
+      this._authService.checkToken().subscribe(res => this.handleResponse(res));
+    }
   }
 
   handleResponse(response: any) {

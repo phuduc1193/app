@@ -7,7 +7,7 @@ var mongoose        = require('mongoose'),
     db              = require('../common/db');
 
 var UserSchema = new Schema({
-  username: BaseSchema.uniqueIdentifier,
+  authId: BaseSchema.uniqueIdentifier,
   primaryEmail: BaseSchema.email,
   name:   BaseSchema.name,
   addresses: [BaseSchema.address],
