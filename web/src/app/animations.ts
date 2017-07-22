@@ -22,7 +22,7 @@ export const fadeOut = trigger('fadeOut',
 [
   state('in', style({ opacity: 1 })),
   transition('* => void', [
-    animate('0.2s 0.1s ease-out', style({
+    animate('0.5s 0.2s ease-out', style({
       opacity: 0
     }))
   ])

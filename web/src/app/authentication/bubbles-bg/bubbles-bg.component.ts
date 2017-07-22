@@ -13,7 +13,6 @@ export class BubblesBGComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

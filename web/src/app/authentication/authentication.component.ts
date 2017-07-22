@@ -4,7 +4,7 @@ import { fadeOut } from '../animations';
 
 @Component({
   selector: 'app-authentication',
-  template: ` <div class="wrapper" *ngIf="show">
+  template: ` <div class="wrapper" *ngIf="show" [@fadeOut]>
                 <app-bubbles-bg></app-bubbles-bg>
                 <app-login></app-login>
                 <app-registration></app-registration>
@@ -16,16 +16,9 @@ import { fadeOut } from '../animations';
 export class AuthenticationComponent implements OnInit {
   show: boolean;
 
-  constructor(private _authService: AuthService) {
-  }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit() {
-    this._authService.currentLoginState.subscribe(state => this.handleState(state));
-  }
-
-  handleState(state: number) {
-    if (state == 2)
-      setTimeout(function() { this.show = false }, 1000);
-    else this.show = true;
+    this._authService.currentLoginState.subscribe(state => this.show = (state == 2 ? false : true));
   }
 }
