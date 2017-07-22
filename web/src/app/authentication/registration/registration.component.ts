@@ -53,11 +53,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleResponse(response: any) {
-    if (response.status.code === 200 && typeof(response.data.access_token) !== 'undefined' && typeof(response.data.refresh_token) !== 'undefined') {
-      localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('refresh_token', response.data.refresh_token);
-      this._authService.setLoginState(2);
-    }
+    this._authService.loginCallback(response);
   }
 
   handleError(error: any) {

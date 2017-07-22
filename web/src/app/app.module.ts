@@ -18,7 +18,6 @@ import { LoginComponent } from './authentication/login/login.component';
 import { BubblesBGComponent } from './authentication/bubbles-bg/bubbles-bg.component';
 import { RegistrationComponent } from './authentication/registration/registration.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
