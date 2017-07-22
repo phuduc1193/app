@@ -13,7 +13,7 @@ var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
       return next(err, false);
     }
     if (data) {
-      if (Date.now() <= jwt_payload.exp)
+      if (Date.now() / 1000 <= jwt_payload.exp)
         next(null, data);
       next(null, false);
     } else {

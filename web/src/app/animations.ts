@@ -21,6 +21,12 @@ export const flyInOut = trigger('flyInOut',
 export const fadeOut = trigger('fadeOut',
 [
   state('in', style({ opacity: 1 })),
+  transition('void => *', [
+    style({
+      opacity: 1
+    }),
+    animate('0.5s 0.2s ease-in')
+  ]),
   transition('* => void', [
     animate('0.5s 0.2s ease-out', style({
       opacity: 0

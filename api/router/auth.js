@@ -8,6 +8,7 @@ var express     = require('express'),
     User        = require('../schema/user'),
     jwtOptions  = require('../common/jwt-options'),
     jwt         = require('jsonwebtoken'),
+    passport   = require('../common/passport'),
     bcrypt      = require('bcrypt-nodejs');
 
 authRouter.post('/login', function (req, res, next) {
@@ -132,6 +133,15 @@ authRouter.post('/register', function (req, res, next) {
         }
       });
     });
+  });
+});
+
+authRouter.get('/token', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+  return res.status(200).json({
+    status: {
+      code: 200,
+      message: 'OK'
+    }
   });
 });
 

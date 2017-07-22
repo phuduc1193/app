@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../environments/environment';
 import { FormGroup } from '@angular/forms';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -12,6 +12,14 @@ export class AuthService {
   currentLoginState = this._loginState.asObservable();
 
   constructor(private _http: Http) { }
+
+  checkToken() {
+    let token = localStorage.getItem('access_token');
+    let headers = new Headers({ 'Authorization': 'JWT ' + token })
+    let options = new RequestOptions({ headers: headers });
+    return this._http.get(environment.apiUrl + 'auth/token', options)
+      .map(res => res.json());
+  }
 
   setLoginState(value: number) {
     this._loginState.next(value);
