@@ -38,7 +38,7 @@ var service = {
 
 function noDataResponse () {
   return {
-    response: {
+    status: {
       code: 404,
       message: 'No data found'
     }
@@ -47,7 +47,7 @@ function noDataResponse () {
 
 function successResponseWithData (data) {
   return {
-    response: {
+    status: {
       code: 200,
       message: 'Success'
     },

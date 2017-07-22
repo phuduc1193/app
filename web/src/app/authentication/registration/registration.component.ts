@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { environment } from '../../environments/environment';
-import { ValidationService } from '../validation.service';
-import { LoginStateService } from '../login-state.service';
-import { flyInOut } from '../animations';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { ValidationService } from '../../validation.service';
+import { AuthService } from '../auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { flyInOut } from '../../animations';
 
 @Component({
   selector: 'app-registration',
@@ -16,10 +14,10 @@ export class RegistrationComponent implements OnInit {
   show: boolean;
   message: String;
   form: FormGroup;
-  constructor(private _fb: FormBuilder, private _loginStateService: LoginStateService, private _http: Http) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService, private _flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
-    this._loginStateService.currentLoginState.subscribe(state => this.show = !state);
+    this._authService.currentLoginState.subscribe(state => this.show = (state == 0 || state == 2 ? false : true));
     this.message = 'Registration';
     this.form =  this._fb.group({
       username: ['', [Validators.required, ValidationService.usernameValidator]],
@@ -43,12 +41,27 @@ export class RegistrationComponent implements OnInit {
   }
 
   registration() {
-    this._http.post(environment.apiUrl + 'auth/register', this.form.value)
-      .map(res => res.json())
-      .subscribe(result => console.log(result));
+    this._authService.registration(this.form)
+        .subscribe(
+          response => this.handleResponse(response),
+          error => this.handleError(error)
+        );
   }
 
   toggleLoginState() {
-    this._loginStateService.setLoginState(true);
+    this._authService.setLoginState(0);
+  }
+
+  handleResponse(response: any) {
+    if (response.status.code === 200 && typeof(response.data.access_token) !== 'undefined' && typeof(response.data.refresh_token) !== 'undefined') {
+      localStorage.setItem('access_token', response.data.access_token);
+      localStorage.setItem('refresh_token', response.data.refresh_token);
+      this._authService.setLoginState(2);
+    }
+  }
+
+  handleError(error: any) {
+    var err = JSON.parse(error._body);
+    this._flashMessagesService.show(err.status.message);
   }
 }

@@ -55,3 +55,13 @@ body {
 .input-lg {
   font-size: 18px;
 }
+
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px #dddddd;
+    padding: 0 15px;
+}

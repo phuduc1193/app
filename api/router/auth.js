@@ -13,9 +13,9 @@ var express     = require('express'),
 authRouter.post('/login', function (req, res, next) {
   if(!req.body.username || !req.body.password){
     return res.status(401).json({
-      response: {
-        status: 40100,
-        message: "missing login"
+      status: {
+        code: 40100,
+        message: "Missing login"
       }
     });
   }
@@ -25,9 +25,9 @@ authRouter.post('/login', function (req, res, next) {
   }, function (err, data) {
     if (err){
        return res.status(401).json({
-        response: {
-          status: 40101,
-          message: "no username"
+        status: {
+          code: 40101,
+          message: "No username matched"
         }
       });
     }
@@ -41,9 +41,9 @@ authRouter.post('/login', function (req, res, next) {
         var payload = service.jwtClaims(data._id);
         var token = jwt.sign(payload, jwtOptions.secretOrKey);
         return res.status(200).json({
-          response: {
-            status: 200,
-            message: 'success'
+          status: {
+            code: 200,
+            message: 'Success'
           },
           data: {
             access_token: token,
@@ -52,9 +52,9 @@ authRouter.post('/login', function (req, res, next) {
         });
       } else {
         return res.status(401).json({
-          response: {
-            status: 40102,
-            message: "wrong password"
+          status: {
+            code: 40102,
+            message: "Wrong password"
           }
         });
       }
@@ -65,9 +65,9 @@ authRouter.post('/login', function (req, res, next) {
 authRouter.post('/refresh', function(req, res, next) {
   if(!req.body.refresh_token && !req.body.sub){
     return res.status(400).json({
-      response: {
-        status: 40010,
-        message: "missing information"
+      status: {
+        code: 40010,
+        message: "Missing information"
       }
     });
   }
@@ -77,9 +77,9 @@ authRouter.post('/refresh', function(req, res, next) {
   }, function (err, data) {
     if (err){
        return res.status(401).json({
-        response: {
-          status: 40110,
-          message: "bad credential"
+        status: {
+          code: 40110,
+          message: "Bad credential"
         }
       });
     }
@@ -90,9 +90,9 @@ authRouter.post('/refresh', function(req, res, next) {
     var payload = service.jwtClaims(data._id);
     var token = jwt.sign(payload, jwtOptions.secretOrKey);
     return res.status(204).json({
-      response: {
-        status: 20410,
-        message: 'token updated'
+      status: {
+        code: 20410,
+        message: 'Token updated'
       },
       data: {
         access_token: token
@@ -112,9 +112,9 @@ authRouter.post('/register', function (req, res, next) {
       if (err) {
         if(err.name == 'ValidationError')
           return res.status(400).json({
-             response: {
-              status: 40000,
-              message: 'username taken'
+             status: {
+              code: 40000,
+              message: 'Username taken'
             }
           });
         return next();
@@ -122,9 +122,9 @@ authRouter.post('/register', function (req, res, next) {
       var payload = service.jwtClaims(data._id);
       var token = jwt.sign(payload, jwtOptions.secretOrKey);
       return res.status(201).json({
-        response: {
-          status: 201,
-          message: 'created'
+        status: {
+          code: 201,
+          message: 'Created'
         },
         data: {
           access_token: token,
