@@ -1,0 +1,24 @@
+import { Component, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ValidationService } from './validation.service';
+
+@Component({
+  selector: 'control-message',
+  template: `<div *ngIf="errorMessage != null">{{errorMessage}}</div>`,
+  styles: ['div { text-align: left; padding-bottom: 2em; color: #777; text-justify: inter-word; }']
+})
+export class ControlMessage {
+
+  @Input() control: FormControl;
+  constructor() { }
+
+  get errorMessage() {
+    for (let propertyName in this.control.errors) {
+      if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
+        return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
+      }
+    }
+    
+    return null;
+  }
+}
