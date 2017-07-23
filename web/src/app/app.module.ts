@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
     FlashMessagesModule,
     AuthModule, MainRouterModule
   ],
-  providers: [ ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

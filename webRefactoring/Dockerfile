@@ -11,7 +11,7 @@ COPY . .
 COPY nginx/default.conf /etc/nginx/conf.d/
 
 RUN npm install \
-  && ng build --aot --prod \
+zzng build --aot --prod \
   && rm -rf /usr/share/nginx/html/* \
   && mv ./dist/* /usr/share/nginx/html/ \
   && npm cache clean \

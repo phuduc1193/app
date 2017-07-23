@@ -1,10 +1,10 @@
-import { WebRefractoringPage } from './app.po';
+import { WebPage } from './app.po';
 
-describe('web-refractoring App', () => {
-  let page: WebRefractoringPage;
+describe('web App', () => {
+  let page: WebPage;
 
   beforeEach(() => {
-    page = new WebRefractoringPage();
+    page = new WebPage();
   });
 
   it('should display welcome message', () => {
