@@ -8,6 +8,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthModule } from './authentication/auth.module';
 
 import { ValidationService } from './validation.service';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ControlMessage } from './authentication/control-message/control-message.component';
@@ -36,6 +37,7 @@ import { RegistrationComponent } from './authentication/registration/registratio
     HttpModule,
     FlashMessagesModule,
     AuthModule,
+    RouterModule,
     HomeModule
   ],
   providers: [ ValidationService ],

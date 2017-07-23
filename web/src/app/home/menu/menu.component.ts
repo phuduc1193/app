@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
     let token = localStorage.getItem('token');
     let data = this.jwtHelper.decodeToken(token);
     if (typeof(data.name) === 'undefined')
-      this.name = "Please setup your profile";
+      this.name = "Hello, Stranger";
     else
       this.name = data.name;
   }

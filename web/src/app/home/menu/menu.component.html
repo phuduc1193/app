@@ -6,7 +6,7 @@
     <div class="menu-right">
       <button md-button [mdMenuTriggerFor]="menu">{{name}} <md-icon>person</md-icon></button>
       <md-menu #menu="mdMenu" [overlapTrigger]="false">
-        <button md-menu-item>Profile</button>
+        <button md-menu-item [routerLink]="['/profile']">Profile</button>
         <button md-menu-item>Settings</button>
         <hr class="menu-separator"/>
         <button md-menu-item (click)="logout()">Logout</button>
