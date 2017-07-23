@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ValidationService } from '../../shared/validation.service';
+import { AuthService } from '../auth.service';
 import { flyInOut } from '../../shared/animations';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   message: String;
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _auth: AuthService) { }
 
   ngOnInit() {
     this.message = "Welcome, let's log you in to see wonders !";
@@ -22,5 +23,9 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, ValidationService.usernameValidator]],
       password: ['', [Validators.required, ValidationService.passwordValidator]],
     });
+  }
+
+  login() {
+    this._auth.login(this.form);
   }
 }

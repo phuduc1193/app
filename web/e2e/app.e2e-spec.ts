@@ -1,14 +1,14 @@
-import { WebPage } from './app.po';
+import { WebRefractoringPage } from './app.po';
 
-describe('web App', () => {
-  let page: WebPage;
+describe('web-refractoring App', () => {
+  let page: WebRefractoringPage;
 
   beforeEach(() => {
-    page = new WebPage();
+    page = new WebRefractoringPage();
   });
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });

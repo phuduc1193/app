@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from './menu/menu.component';
-import { MdMenuModule, MdButtonModule, MdIconModule, MdInputModule } from '@angular/material';
-import { HomeRouterModule } from './home.router';
-import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '',
+    component: HomeComponent
+  }
+];
 
 @NgModule({
   imports: [
-    CommonModule,
-    MdIconModule,
-    MdButtonModule,
-    MdMenuModule,
-    HomeRouterModule
+    CommonModule
   ],
-  declarations: [ MenuComponent, ProfileComponent ],
-  exports: [ MenuComponent ]
+  declarations: [ HomeComponent ],
+  exports: [ HomeModule ]
 })
 export class HomeModule { }
