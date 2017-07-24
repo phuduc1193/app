@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: '',
     component: AuthComponent,
     children: [
-      { path: 'Login', component: LoginComponent },
-      { path: 'Register', component: RegisterComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
     ]
   }
 ];
@@ -38,7 +38,6 @@ const routes: Routes = [
     MdButtonModule, MdCardModule, MdIconModule, MdInputModule
   ],
   providers: [
-    ,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,

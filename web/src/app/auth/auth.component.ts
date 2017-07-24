@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { tokenNotExpired } from 'angular2-jwt';
 import { fadeOut } from '../shared/animations';
 
 @Component({
@@ -18,7 +19,9 @@ export class AuthComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit() {
-    this._router.navigateByUrl('/Auth/Login');
+    if (tokenNotExpired())
+      this._router.navigate(['/home']);
+    else this._router.navigate(['/login']);
   }
 
 }
