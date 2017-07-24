@@ -21,7 +21,7 @@
     </form>
     <table class="full-width">
       <tr>
-        <td><button md-raised-button [disabled]="!form.valid" color="primary">Register</button></td>
+        <td><button md-raised-button [disabled]="!form.valid" (click)="register()" color="primary">Register</button></td>
         <td><button md-raised-button routerLink="/Auth/Login">Cancel</button></td>
       </tr>
     </table>

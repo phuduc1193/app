@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ValidationService } from '../../shared/validation.service';
+import { AuthService } from '../auth.service';
 import { flyInOut } from '../../shared/animations';
 
 @Component({
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   message: String;
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(private _fb: FormBuilder, private _auth: AuthService) { }
 
   ngOnInit() {
     this.message = 'Registration';
@@ -37,5 +38,9 @@ export class RegisterComponent implements OnInit {
       }
       return passwordConfirmationInput.setErrors(null);
     }
+  }
+
+  register() {
+    this._auth.register(this.form);
   }
 }

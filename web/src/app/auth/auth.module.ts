@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { BubblesBGComponent } from './bubbles-bg/bubbles-bg.component';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
-import { AuthService } from './auth.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -39,7 +38,7 @@ const routes: Routes = [
     MdButtonModule, MdCardModule, MdIconModule, MdInputModule
   ],
   providers: [
-    AuthService,
+    ,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,

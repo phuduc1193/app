@@ -20,6 +20,21 @@ export class AuthService {
         );
   }
 
+  register(_form: FormGroup) {
+    this._http.post(environment.apiUrl + 'auth/register', _form.value)
+        .map(res => res.json()).subscribe(
+          response => this.handleResponse(response),
+          error => this.handleError(error)
+        );
+  }
+
+  logout() {
+    if (localStorage.getItem('token') && localStorage.getItem('refresh_token')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('refresh_token');
+    }
+  }
+
   handleResponse(response: any) {
     if (response.status.code === 200 &&
         typeof(response.data.access_token) !== 'undefined' &&
