@@ -8,8 +8,9 @@ var express     = require('express'),
     User        = require('../schema/user'),
     jwtOptions  = require('../common/jwt-options'),
     jwt         = require('jsonwebtoken'),
-    passport   = require('../common/passport'),
+    passport    = require('../common/passport'),
     bcrypt      = require('bcrypt-nodejs');
+
 
 authRouter.post('/login', function (req, res, next) {
   if(!req.body.username || !req.body.password){
@@ -32,19 +33,13 @@ authRouter.post('/login', function (req, res, next) {
         }
       });
     }
-    
+
     if (data == null || data.length == 0)
       return service.response(res, data);
 
     bcrypt.compare(req.body.password, data.password, function (err, isSuccess) {
       if (isSuccess) {
         var payload = service.jwtClaims(data._id);
-        User.findOne({'authId': data._id}, function (err, user_data) {
-          if (user_data){
-            payload.name = user_data.name.givenName + " " + user_data.name.familyName;
-          }
-        })
-
         var token = jwt.sign(payload, jwtOptions.secretOrKey);
         return res.status(200).json({
           status: {

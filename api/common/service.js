@@ -16,8 +16,10 @@ var service = {
   response: function (res, data) {
     if (data != null && data.length != 0)
       res.status(200).json(successResponseWithData(data));
-    else
-      res.status(404).json(noDataResponse());
+    else 
+    {
+      return res.status(404).json(noDataResponse());
+    }
   },
   jwtClaims: function (id) {
     return {

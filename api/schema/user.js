@@ -7,14 +7,16 @@ var mongoose        = require('mongoose'),
     db              = require('../common/db');
 
 var UserSchema = new Schema({
-  authId: BaseSchema.uniqueIdentifier,
-  primaryEmail: BaseSchema.email,
+  auth_id: { type: Schema.Types.ObjectId, ref: 'auths'},
+  email: BaseSchema.email,
   name:   BaseSchema.name,
-  addresses: [BaseSchema.address],
-  organizations: [BaseSchema.organization],
-  phones: [BaseSchema.phone],
-  relations: [BaseSchema.relation],
-  gender: BaseSchema.gender
+  address: [BaseSchema.address],
+  organization: [BaseSchema.organization],
+  phone: [BaseSchema.phone],
+  relation: [BaseSchema.relation],
+  gender: BaseSchema.gender,
+  introduction: String,
+  url: BaseSchema.unique
 });
 
 UserSchema.plugin(validator);

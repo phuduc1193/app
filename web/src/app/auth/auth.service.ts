@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
-import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired } from 'angular2-jwt';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 @Injectable()
 export class AuthService {
 
-  constructor(private _http: Http, private _authHttp: AuthHttp, private _flashMessagesService: FlashMessagesService, private _router: Router) { }
+  constructor(private _http: Http, private _flashMessagesService: FlashMessagesService, private _router: Router) { }
 
   login(_form: FormGroup) {
     this._http.post(environment.apiUrl + 'auth/login', _form.value)

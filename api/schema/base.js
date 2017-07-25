@@ -7,8 +7,8 @@ var service     = require('../common/service');
 
 var BaseSchema = {
   name: new Schema({
-    givenName: {type: String},
-    familyName: {type: String}
+    first: {type: String},
+    last: {type: String}
   }),
   email: {
     type: String,
@@ -21,8 +21,8 @@ var BaseSchema = {
   },
   address: new Schema({
     type: {type: String},
-    customType: {type: String},
-    streetAddress: {type: String},
+    custom_type: {type: String},
+    street: {type: String},
     locality: {type: String},
     region: {type: String},
     postalCode: {
@@ -32,7 +32,7 @@ var BaseSchema = {
     }
   }),
   organization: new Schema({
-    _id: Schema.Types.ObjectId,
+    _id: { type: Schema.Types.ObjectId, ref: 'organizations' },
     name: String,
     title: String,
     primary: Boolean,
@@ -40,16 +40,16 @@ var BaseSchema = {
       type: String,
       enum: ['Work', 'School', 'University', 'Other']
     },
-    startDate: Date,
-    endDate: Date
+    start_date: Date,
+    end_date: Date
   }),
   phone: new Schema({
     value: {
       type: String,
       validate: {
-          validator: function(v) {
-              var re = /^\d{10}$/;
-              return (v == null || v.trim().length < 1) || re.test(v)
+          validator: function(string) {
+              var regex = /^\d{10}$/;
+              return (string == null || string.trim().length < 1) || regex.test(string)
           },
           message: 'Provided phone number is invalid.'
       }
@@ -60,23 +60,23 @@ var BaseSchema = {
     }
   }),
   relation: new Schema({
-    _id: Schema.Types.ObjectId,
+    _id: { type: Schema.Types.ObjectId, ref: 'users'},
     value: {
       type: String,
       enum: ['Colleague', 'Father', 'Mother', 'Sibling', 'Cousin', 'Spouse', 'Child', 'Grandchild', 'Grand-father', 'Grand-mother', 'Father-in-law', 'Mother in-law', 'Brother-in-law', 'Sister in-law']
     },
-    customType: String
+    type: String
   }),
   gender: {
     type: String,
     enum: ['Male', 'Female']
   },
-  uniqueIdentifier: {
+  unique: {
     type: String,
     trim: true,
     lowercase: true,
     unique: true,
-    required: 'Unique Identifier is required'
+    required: 'Unique field is required'
   }
 };
 

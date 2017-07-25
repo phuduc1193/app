@@ -11,15 +11,15 @@ export class MenuComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
   name: string;
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService) { this.name = "Hello, Stranger"; }
 
   ngOnInit() {
-    let token = localStorage.getItem('token');
-    let data = this.jwtHelper.decodeToken(token);
-    if (typeof(data.name) === 'undefined')
-      this.name = "Hello, Stranger";
-    else
-      this.name = data.name;
+    let profile = localStorage.getItem('profile');
+    if (profile){
+      let data = this.jwtHelper.decodeToken(profile);
+      if (typeof(data.name) !== 'undefined')
+        this.name = data.name;
+    }
   }
 
   logout() {

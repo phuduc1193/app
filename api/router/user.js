@@ -9,18 +9,18 @@ var express    = require('express'),
 userRouter.get('/', function (req, res, next) {
   User.find({}, function (err, data) {
     if (err)
-      next();
+      return next();
     return service.response(res, data);
   });
 });
 
-userRouter.get('/:username', function (req, res, next) {
-  User.findOne({
-    'username': req.params.username
-  }, function (err, data) {
+userRouter.post('/profile', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+  User.findOne({ 'auth_id': req.body.unique }, function (err, data) {
     if (err)
-      next();
-    return service.response(res, data);
+      return next();
+    if (data)
+      return service.response(res, data);
+    return res.status(200).jsonp({ status: { code: 40410, message: "Please setup your profile"}});
   });
 });
 
@@ -34,6 +34,16 @@ userRouter.put('/', passport.authenticate('jwt', { session: false }), function (
 
 userRouter.delete('/', passport.authenticate('jwt', { session: false }), function (req, res, next) {
   
+});
+
+userRouter.get('/:email', function (req, res, next) {
+  User.findOne({
+    'email': req.params.email
+  }, function (err, data) {
+    if (err)
+      return next();
+    return service.response(res, data);
+  });
 });
 
 module.exports = userRouter;

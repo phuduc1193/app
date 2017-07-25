@@ -7,7 +7,7 @@ var mongoose    = require('mongoose'),
     db          = require('../common/db');
 
 var AuthSchema = new Schema({
-  username: BaseSchema.uniqueIdentifier,
+  username: BaseSchema.unique,
   password: String,
   token: String
 });
