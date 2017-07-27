@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
-import { MdMenuModule, MdButtonModule, MdIconModule } from '@angular/material';
+import { ProfileSetupComponent } from './profile/profile-setup.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UserService } from './user/user.service';
+import { SharedModule } from '../shared/shared.module';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 
@@ -21,7 +21,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 const routes: Routes = [
   { path: '', component: HomeComponent, children:
     [
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'setup', component: ProfileSetupComponent }
     ]
   },
 ];
@@ -29,16 +30,15 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule, RouterModule.forChild(routes),
-    MdMenuModule, MdButtonModule, MdIconModule
+    SharedModule,
   ],
   providers: [
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    },
-    UserService, JwtHelper
+    }
   ],
-  declarations: [ HomeComponent, ProfileComponent, MenuComponent ]
+  declarations: [ HomeComponent, ProfileComponent, MenuComponent, ProfileSetupComponent ]
 })
 export class HomeModule { }

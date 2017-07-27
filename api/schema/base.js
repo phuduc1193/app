@@ -7,8 +7,9 @@ var service     = require('../common/service');
 
 var BaseSchema = {
   name: new Schema({
-    first: {type: String},
-    last: {type: String}
+    first: {type: String, required: true},
+    last: {type: String, required: true},
+    middle: {type: String}
   }),
   email: {
     type: String,

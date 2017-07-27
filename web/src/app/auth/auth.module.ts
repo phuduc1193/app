@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule } from '@angular/material';
-import { ControlMessage } from '../shared/control-message.component';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './register/register.component';
@@ -34,8 +32,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule, RouterModule.forChild(routes),
-    FormsModule, ReactiveFormsModule, 
-    MdButtonModule, MdCardModule, MdIconModule, MdInputModule
+    SharedModule
   ],
   providers: [
     {
@@ -44,6 +41,6 @@ const routes: Routes = [
       deps: [Http, RequestOptions]
     }
   ],
-  declarations: [ AuthComponent, BubblesBGComponent, RegisterComponent, LoginComponent, ControlMessage ]
+  declarations: [ AuthComponent, BubblesBGComponent, RegisterComponent, LoginComponent ]
 })
 export class AuthModule { }

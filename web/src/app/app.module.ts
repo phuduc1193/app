@@ -4,9 +4,10 @@ import { MainRouterModule } from './main-router.module';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
+import { SharedModule } from './shared/shared.module';
+import { UserService } from './home/user/user.service';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -17,10 +18,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpModule,
-    FlashMessagesModule,
-    AuthModule, MainRouterModule
+    AuthModule, MainRouterModule,
+    SharedModule
   ],
-  providers: [ AuthService, AuthGuard ],
+  providers: [ AuthService, AuthGuard, UserService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

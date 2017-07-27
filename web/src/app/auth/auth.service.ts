@@ -35,7 +35,7 @@ export class AuthService {
     if (this.isLoggedIn()) {
       localStorage.removeItem('token');
       localStorage.removeItem('refresh_token');
-      this._router.navigate(['/auth/login']);
+      this._router.navigate(['/login']);
     }
   }
 
