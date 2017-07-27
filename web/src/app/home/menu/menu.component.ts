@@ -9,16 +9,14 @@ import { JwtHelper } from 'angular2-jwt';
 })
 export class MenuComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
-  name: string;
+  profile: any;
 
-  constructor(private _authService: AuthService) { this.name = "Hello, Stranger"; }
+  constructor(private _authService: AuthService) { this.profile.name = "Hello, Stranger"; }
 
   ngOnInit() {
-    let profile = localStorage.getItem('profile');
-    if (profile){
-      let data = this.jwtHelper.decodeToken(profile);
-      if (typeof(data.name) !== 'undefined')
-        this.name = data.name;
+    let storage = localStorage.getItem('profile');
+    if (storage){
+      this.profile = this.jwtHelper.decodeToken(storage);
     }
   }
 
