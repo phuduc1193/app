@@ -1,13 +1,23 @@
+@import '../../../mixin.scss';
+
 .icon-primary, .mat-card-title {
   color:#4FA89D;
 }
 
+.icon-primary:hover {
+  color: lighten(#4FA89D, 10%);
+}
+
 .icon-danger {
-  color: #96605c;
+  color: #96605C;
+  &:hover {
+    color: lighten(#96605C, 10%);
+  }
 }
 
 .icon-link {
   cursor: pointer;
   font-size: 45px;
   padding-bottom: 35px;
+  @include transition(color 0.2s);
 }
