@@ -10,13 +10,17 @@ import { JwtHelper } from 'angular2-jwt';
 export class MenuComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
   profile: any;
+  greetings: string;
 
-  constructor(private _authService: AuthService) { this.profile.name = "Hello, Stranger"; }
+  constructor(private _authService: AuthService) {
+    this.greetings = "Stranger";
+  }
 
   ngOnInit() {
     let storage = localStorage.getItem('profile');
     if (storage){
       this.profile = this.jwtHelper.decodeToken(storage);
+      this.greetings = this.profile.name;
     }
   }
 

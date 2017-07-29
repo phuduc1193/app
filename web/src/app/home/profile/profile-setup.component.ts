@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ValidationService } from '../../shared/validation.service';
 import { PhoneTypeEnum } from '../../shared/enum';
 
@@ -23,8 +23,16 @@ export class ProfileSetupComponent implements OnInit {
       lastName: ['', Validators.required],
       middleName: new FormControl(),
       email: ['', [Validators.required, ValidationService.emailValidator]],
-      phone: ['', [Validators.required, ValidationService.phoneValidator]],
-      phoneType: ['', Validators.required],
+      phone: new FormArray([
+        this.initPhone()
+      ])
+    });
+  }
+
+  initPhone() {
+    return this._fb.group({
+      value: ['', [Validators.required, ValidationService.phoneValidator]],
+      type: ['', Validators.required]
     });
   }
 
@@ -36,4 +44,13 @@ export class ProfileSetupComponent implements OnInit {
     }
   }
 
+  addPhone() {
+    const control = <FormArray>this.form.controls['phone'];
+    control.push(this.initPhone());
+  }
+
+  removePhone(i: number) {
+    const control = <FormArray>this.form.controls['phone'];
+    control.removeAt(i);
+  }
 }

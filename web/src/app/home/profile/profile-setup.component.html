@@ -4,48 +4,66 @@
   </md-card-title>
   <md-card-content class="text-center">
     <form novalidate [formGroup]="form">
-      <table class="full-width" cellspacing="0"><tr>
-        <td>
-          <md-input-container class="full-width input-lg" flex>
-            <input mdInput placeholder="First Name" formControlName="firstName">
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container class="full-width input-lg" flex>
-            <input mdInput placeholder="Last Name" formControlName="lastName">
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container class="input-lg" flex>
-            <input mdInput placeholder="Middle Name or Initial">
-          </md-input-container>
-        </td>
-      </tr><tr class="text-center">
-      <td><control-message [control]="form.controls.firstName"></control-message></td>
-      <td><control-message [control]="form.controls.lastName"></control-message></td>
-      <td><control-message [control]="form.controls.middleName"></control-message></td>
-      </tr></table>
+      <table class="full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-input-container class="full-width input-lg" flex>
+              <input mdInput placeholder="First Name" formControlName="firstName">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="full-width input-lg" flex>
+              <input mdInput placeholder="Last Name" formControlName="lastName">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="input-lg" flex>
+              <input mdInput placeholder="Middle Name or Initial">
+            </md-input-container>
+          </td>
+        </tr>
+        <tr class="text-center">
+          <td>
+            <control-message [control]="form.controls.firstName"></control-message>
+          </td>
+          <td>
+            <control-message [control]="form.controls.lastName"></control-message>
+          </td>
+          <td>
+            <control-message [control]="form.controls.middleName"></control-message>
+          </td>
+        </tr>
+      </table>
       <md-input-container class="full-width input-lg" flex>
         <input mdInput placeholder="Email" formControlName="email">
       </md-input-container>
       <control-message [control]="form.controls.email"></control-message>
 
-      <table class="full-width" cellspacing="0"><tr>
-        <td>
-          <md-input-container class="full-width input-lg" flex>
-            <input mdInput placeholder="Phone Number" formControlName="phone">
-          </md-input-container>
-        </td>
-        <td>
-          <md-select placeholder="Phone Type" formControlName="phoneType">
-            <md-option *ngFor="let type of listPhoneType" [value]="type.name">{{type.name}}</md-option>
-          </md-select>
-        </td>
-      </tr><tr>
-        <td><control-message [control]="form.controls.phone"></control-message></td>
-        <td><control-message [control]="form.controls.phoneType"></control-message></td>
-      </tr>
-      </table>
+      <div formArrayName="phone">
+        <table class="full-width" cellspacing="0" [formGroupName]="i" *ngFor="let phone of form.controls.phone.controls; let i = index">
+          <tr>
+            <td>
+              <md-input-container class="full-width input-lg" flex>
+                <input mdInput placeholder="Phone Number" formControlName="value">
+              </md-input-container>
+            </td>
+            <td>
+              <md-select placeholder="Phone Type" formControlName="type">
+                <md-option *ngFor="let type of listPhoneType" [value]="type.name">{{type.name}}</md-option>
+              </md-select>
+            </td>
+            <td class="text-center">
+              <md-icon *ngIf="i == 0" (click)="addPhone()" class="icon-link icon-primary">add_circle</md-icon>
+              <md-icon *ngIf="i != 0" (click)="removePhone(i)" class="icon-link icon-danger" color="accent">remove_circle</md-icon>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <control-message [control]="phone.controls.value"></control-message>
+            </td>
+          </tr>
+        </table>
+      </div>
     </form>
     <table class="full-width">
       <tr>
