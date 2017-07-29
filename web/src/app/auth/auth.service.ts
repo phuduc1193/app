@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   handleResponse(response: any) {
-    if (response.status.code === 200 &&
+    if ((response.status.code === 200 || response.status.code === 201) &&
         typeof(response.data.access_token) !== 'undefined' &&
         typeof(response.data.refresh_token) !== 'undefined')
     {

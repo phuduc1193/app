@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . /api
 
+VOLUME . /api
+
 EXPOSE 3000
 
 CMD ["npm", "start"]

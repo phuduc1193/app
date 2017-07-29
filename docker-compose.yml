@@ -4,49 +4,28 @@ services:
     build: ./web
     ports:
       - "80:80"
-    depends_on:
-      - api-gateway
     links:
       - api-gateway
   api-gateway:
     build: ./api-gateway
     ports:
       - "3000:3000"
-    depends_on:
-      - auth01
-      - auth02
     links:
       - auth01
       - auth02
   auth01:
     build: ./api/auth
-    expose:
-      - "3000"
-    depends_on:
-      - api-db
     links:
       - api-db
-    environment:
-      DATABASE_URL: mongodb://api-db:27017
-      TOKEN_SECRET: qwert1234
     volumes:
-      - ./api/auth/:/api
+      - ./api/auth:/api
   auth02:
     build: ./api/auth
-    expose:
-      - "3000"
-    depends_on:
-      - api-db
     links:
       - api-db
-    environment:
-      DATABASE_URL: mongodb://api-db:27017
-      TOKEN_SECRET: qwert1234
     volumes:
-      - ./api/auth/:/api
+      - ./api/auth:/api
   api-db:
-    image: mongo:3.4
-    expose:
-      - "27017"
+    build: ./api/mongo-api
     volumes:
-      - ./api/auth/db/:/data/db/
+      - ./api/mongo-api/db:/data/db/

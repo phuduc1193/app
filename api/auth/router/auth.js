@@ -109,7 +109,7 @@ authRouter.post('/register', function (req, res, next) {
       password: hash,
       token: service.guid()
     });
-    user.save(function (err, data) {
+    var promise = user.save(function (err, data) {
       if (err) {
         if(err.name == 'ValidationError')
           return res.status(400).json({

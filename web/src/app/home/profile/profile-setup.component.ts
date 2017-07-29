@@ -12,7 +12,8 @@ import { flyInOut } from '../../shared/animations';
   host: {'[@flyInOut]':''}
 })
 export class ProfileSetupComponent implements OnInit {
-  form: FormGroup;
+  basicForm: FormGroup;
+  referenceForm: FormGroup;
   step: number;
   listPhoneType: any = [];
 
@@ -22,7 +23,7 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form =  this._fb.group({
+    this.basicForm =  this._fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       middleName: new FormControl(),
@@ -30,11 +31,12 @@ export class ProfileSetupComponent implements OnInit {
       email: ['', [Validators.required, ValidationService.emailValidator]],
       phones: new FormArray([
         this.initPhone()
-      ]),
+      ])
+    });
+    this.referenceForm = this._fb.group({
       addresses: new FormArray([
         this.initAddress()
-      ]),
-
+      ])
     });
   }
 
@@ -67,30 +69,30 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   addPhone() {
-    const control = <FormArray>this.form.controls['phones'];
+    const control = <FormArray>this.basicForm.controls['phones'];
     control.push(this.initPhone());
   }
 
   removePhone(i: number) {
-    const control = <FormArray>this.form.controls['phones'];
+    const control = <FormArray>this.basicForm.controls['phones'];
     control.removeAt(i);
   }
 
   addAddress() {
-    const control = <FormArray>this.form.controls['addresses'];
+    const control = <FormArray>this.referenceForm.controls['addresses'];
     control.push(this.initAddress());
   }
 
   removeAddress(i: number) {
-    const control = <FormArray>this.form.controls['addresses'];
+    const control = <FormArray>this.referenceForm.controls['addresses'];
     control.removeAt(i);
   }
 
   get phones(): FormArray {
-    return this.form.get('phones') as FormArray;
+    return this.basicForm.get('phones') as FormArray;
   }
 
   get addresses(): FormArray {
-    return this.form.get('addresses') as FormArray;
+    return this.referenceForm.get('addresses') as FormArray;
   }
 }

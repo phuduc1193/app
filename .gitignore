@@ -27,4 +27,4 @@
 /web/Thumbs.db
 
 /api/auth/node_modules
-/api/auth/db/*
+/api/mongo-api/db/*

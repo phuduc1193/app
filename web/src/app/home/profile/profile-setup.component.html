@@ -3,7 +3,7 @@
     Basic Information
   </md-card-title>
   <md-card-content class="text-center">
-    <form novalidate [formGroup]="form">
+    <form novalidate [formGroup]="basicForm">
        <table class="full-width" cellspacing="0">
         <tr>
           <td>
@@ -24,13 +24,13 @@
         </tr>
         <tr class="text-center">
           <td>
-            <control-message [control]="form.controls.firstName"></control-message>
+            <control-message [control]="basicForm.controls.firstName"></control-message>
           </td>
           <td>
-            <control-message [control]="form.controls.lastName"></control-message>
+            <control-message [control]="basicForm.controls.lastName"></control-message>
           </td>
           <td>
-            <control-message [control]="form.controls.middleName"></control-message>
+            <control-message [control]="basicForm.controls.middleName"></control-message>
           </td>
         </tr>
       </table> 
@@ -48,10 +48,10 @@
         </td>
       </tr><tr>
         <td>
-          <control-message [control]="form.controls.email"></control-message>
+          <control-message [control]="basicForm.controls.email"></control-message>
         </td>
         <td>
-          <control-message [control]="form.controls.gender"></control-message>
+          <control-message [control]="basicForm.controls.gender"></control-message>
         </td>
       </tr>
       </table>
@@ -84,7 +84,7 @@
     <table class="full-width">
       <tr>
         <td><button md-raised-button routerLink="/home">Cancel</button></td>
-        <td><button md-raised-button [disabled]="!form.valid" color="accent" (click)="setStep(1)">Next</button></td>
+        <td><button md-raised-button [disabled]="!basicForm.valid" color="accent" (click)="setStep(1)">Next</button></td>
       </tr>
     </table>
   </md-card-content>
@@ -95,7 +95,7 @@
     Personal Reference
   </md-card-title>
   <md-card-content class="text-center">
-    <form novalidate [formGroup]="form">
+    <form novalidate [formGroup]="referenceForm">
       <div formArrayName="addresses">
         <table [formGroupName]="i" cellspacing="0" *ngFor="let address of addresses.controls; let i = index;">
           <tr>
@@ -130,7 +130,7 @@
     <table class="full-width">
       <tr>
         <td><button md-raised-button (click)="setStep(0)">Back</button></td>
-        <td><button md-raised-button [disabled]="!form.valid" color="accent">Next</button></td>
+        <td><button md-raised-button [disabled]="!referenceForm.valid" color="accent">Next</button></td>
       </tr>
     </table>
   </md-card-content>
