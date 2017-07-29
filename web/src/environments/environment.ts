@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
+  authAPI: 'http://127.0.0.1:3000/auth/',
   apiUrl: 'http://127.0.0.1:3000/api/'
 };

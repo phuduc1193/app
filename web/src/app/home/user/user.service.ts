@@ -17,7 +17,7 @@ export class UserService {
     let params = {
       unique: this.authId()
     };
-    this._authHttp.post(environment.apiUrl + 'users/profile', params)
+    this._authHttp.post(environment.authAPI + 'users/profile', params)
       .map(res => res.json()).subscribe(
         (data) => {
           if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code == 40410)

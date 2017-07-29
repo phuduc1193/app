@@ -13,13 +13,13 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - api01
-      - api02
+      - auth01
+      - auth02
     links:
-      - api01
-      - api02
-  api01:
-    build: ./api
+      - auth01
+      - auth02
+  auth01:
+    build: ./api/auth
     expose:
       - "3000"
     depends_on:
@@ -30,9 +30,9 @@ services:
       DATABASE_URL: mongodb://api-db:27017
       TOKEN_SECRET: qwert1234
     volumes:
-      - ./api/:/api
-  api02:
-    build: ./api
+      - ./api/auth/:/api
+  auth02:
+    build: ./api/auth
     expose:
       - "3000"
     depends_on:
@@ -43,10 +43,10 @@ services:
       DATABASE_URL: mongodb://api-db:27017
       TOKEN_SECRET: qwert1234
     volumes:
-      - ./api/:/api
+      - ./api/auth/:/api
   api-db:
     image: mongo:3.4
     expose:
       - "27017"
     volumes:
-      - ./api/db/:/data/db/
+      - ./api/auth/db/:/data/db/

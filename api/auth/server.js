@@ -14,11 +14,11 @@ app.use(passport.initialize());
 app.use(cors());
 app.options('*', cors());
 
-app.get('/api/docs', function(req, res){
+app.get('/auth/docs', function(req, res){
   res.sendFile(path.join(__dirname, 'public') + '/index.html');
 });
 
-app.use('/api', apiRouter);
+app.use('/auth', apiRouter);
 
 app.listen(3000, function(){
   console.log('API Server is listening on port 3000!');
