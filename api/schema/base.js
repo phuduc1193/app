@@ -26,7 +26,7 @@ var BaseSchema = {
     street: {type: String},
     locality: {type: String},
     region: {type: String},
-    postalCode: {
+    postal_code: {
       type: String,
       minlength: 3,
       maxlength: 10

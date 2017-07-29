@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule, MdMenuModule, MdSelectModule } from '@angular/material';
+import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule, MdMenuModule, MdSelectModule, MdRadioModule, MdGridListModule } from '@angular/material';
 import { ControlMessage } from './control-message.component';
 import { ValidationService } from './validation.service';
 import { JwtHelper } from 'angular2-jwt';
@@ -15,15 +15,15 @@ import { JwtHelper } from 'angular2-jwt';
     ControlMessage
   ],
   imports: [
-    FlashMessagesModule, CommonModule,
+    CommonModule, FlashMessagesModule,
     FormsModule, ReactiveFormsModule,
-    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule
+    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule, MdRadioModule, MdGridListModule
   ],
   providers: [ ValidationService, JwtHelper ],
   exports: [
-    FormsModule, ReactiveFormsModule, FlashMessagesModule,
-    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule,
-    ControlMessage,
+    ControlMessage, FlashMessagesModule,
+    FormsModule, ReactiveFormsModule,
+    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule, MdRadioModule, MdGridListModule
   ]
 })
 export class SharedModule { }

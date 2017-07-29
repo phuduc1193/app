@@ -13,14 +13,16 @@ export class MenuComponent implements OnInit {
   greetings: string;
 
   constructor(private _authService: AuthService) {
-    this.greetings = "Stranger";
+    this.greetings = "Let's get you setup"
   }
 
   ngOnInit() {
     let storage = localStorage.getItem('profile');
     if (storage){
       this.profile = this.jwtHelper.decodeToken(storage);
-      this.greetings = this.profile.name;
+      this.greetings = "Hi " + this.profile.name;
+    } else {
+      
     }
   }
 

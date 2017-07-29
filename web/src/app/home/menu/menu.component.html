@@ -1,22 +1,22 @@
 <div class="top-menu">
   <div class="menu-wrapper">
-    <table class="full-width" style="margin-top:-5px">
-      <tr>
-        <td>Welcome</td>
-        <td class="text-center">
-          <input type="text" placeholder="Search" class="menu-search"/>
-        </td>
-        <td class="text-right">
-          <button md-button [mdMenuTriggerFor]="menu">Hello, {{greetings}} <md-icon>person</md-icon></button>
-        </td>
-      </tr>
-    </table>
-    <md-menu #menu="mdMenu" [overlapTrigger]="false">
-      <button md-menu-item *ngIf="profile" [routerLink]="['/home/profile']">Profile</button>
-      <button md-menu-item *ngIf="!profile" [routerLink]="['/home/setup']">Setup</button>
-      <button md-menu-item>Settings</button>
-      <hr class="menu-separator"/>
-      <button md-menu-item (click)="logout()">Logout</button>
-    </md-menu>
+    <md-grid-list cols="3" rowHeight="65px">
+      <md-grid-tile [colspan]="1">
+        <button md-button [routerLink]="['/home']">Welcome</button>
+      </md-grid-tile>
+      <md-grid-tile [colspan]="1">
+        <input type="text" placeholder="Search" class="menu-search"/>
+      </md-grid-tile>
+      <md-grid-tile [colspan]="1">
+        <button md-button [mdMenuTriggerFor]="menu">{{greetings}} <md-icon>person</md-icon></button>
+      </md-grid-tile>
+      <md-menu #menu="mdMenu" [overlapTrigger]="false">
+        <button md-menu-item *ngIf="profile" [routerLink]="['/home/profile']">Profile</button>
+        <button md-menu-item *ngIf="!profile" [routerLink]="['/home/setup']">Setup</button>
+        <button md-menu-item>Settings</button>
+        <hr class="menu-separator"/>
+        <button md-menu-item (click)="logout()">Logout</button>
+      </md-menu>
+    </md-grid-list>
   </div>
 </div>

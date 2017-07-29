@@ -1,10 +1,10 @@
-<md-card class="form-container-lg">
+<md-card class="form-container-lg fixed-form" [@flyInOut] *ngIf="step == 0">
   <md-card-title>
     Basic Information
   </md-card-title>
   <md-card-content class="text-center">
     <form novalidate [formGroup]="form">
-      <table class="full-width" cellspacing="0">
+       <table class="full-width" cellspacing="0">
         <tr>
           <td>
             <md-input-container class="full-width input-lg" flex>
@@ -33,12 +33,28 @@
             <control-message [control]="form.controls.middleName"></control-message>
           </td>
         </tr>
+      </table> 
+      <table class="full-width" cellspacing="0"><tr>
+        <td>
+          <md-input-container class="full-width input-lg" flex>
+            <input mdInput placeholder="Email" formControlName="email">
+          </md-input-container>
+        </td>
+        <td>
+          <md-radio-group formControlName="gender" class="input-lg">
+            <md-radio-button value="Male" style="margin-right: 1.5em">Male</md-radio-button>
+            <md-radio-button value="Female">Female</md-radio-button>
+          </md-radio-group>
+        </td>
+      </tr><tr>
+        <td>
+          <control-message [control]="form.controls.email"></control-message>
+        </td>
+        <td>
+          <control-message [control]="form.controls.gender"></control-message>
+        </td>
+      </tr>
       </table>
-      <md-input-container class="full-width input-lg" flex>
-        <input mdInput placeholder="Email" formControlName="email">
-      </md-input-container>
-      <control-message [control]="form.controls.email"></control-message>
-
       <div formArrayName="phones">
         <table class="full-width" [formGroupName]="i" cellspacing="0" *ngFor="let phone of phones.controls; let i = index;">
           <tr>
@@ -52,7 +68,7 @@
                 <md-option *ngFor="let phoneType of listPhoneType" [value]="phoneType.name">{{phoneType.name}}</md-option>
               </md-select>
             </td>
-            <td class="text-center">
+            <td>
               <md-icon *ngIf="i == 0" (click)="addPhone()" class="icon-link icon-primary">add_circle</md-icon>
               <md-icon *ngIf="i != 0" (click)="removePhone(i)" class="icon-link icon-danger" color="accent">remove_circle</md-icon>
             </td>
@@ -68,6 +84,52 @@
     <table class="full-width">
       <tr>
         <td><button md-raised-button routerLink="/home">Cancel</button></td>
+        <td><button md-raised-button [disabled]="!form.valid" color="accent" (click)="setStep(1)">Next</button></td>
+      </tr>
+    </table>
+  </md-card-content>
+</md-card>
+
+<md-card class="form-container-lg fixed-form" [@flyInOut] *ngIf="step == 1">
+  <md-card-title>
+    Personal Reference
+  </md-card-title>
+  <md-card-content class="text-center">
+    <form novalidate [formGroup]="form">
+      <div formArrayName="addresses">
+        <table [formGroupName]="i" cellspacing="0" *ngFor="let address of addresses.controls; let i = index;">
+          <tr>
+            <td>
+              <md-input-container class="full-width input-lg" flex>
+                <input mdInput placeholder="Address" formControlName="street">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container class="input-lg" flex>
+                <input mdInput placeholder="City" formControlName="locality">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container class="input-lg" flex>
+                <input mdInput placeholder="Zip code" formControlName="postal_code">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container class="input-lg" flex>
+                <input mdInput placeholder="Country" formControlName="region">
+              </md-input-container>
+            </td>
+            <td>
+              <md-icon *ngIf="i == 0" (click)="addAddress()" class="icon-link icon-primary">add_circle</md-icon>
+              <md-icon *ngIf="i != 0" (click)="removeAddress(i)" class="icon-link icon-danger" color="accent">remove_circle</md-icon>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </form>
+    <table class="full-width">
+      <tr>
+        <td><button md-raised-button (click)="setStep(0)">Back</button></td>
         <td><button md-raised-button [disabled]="!form.valid" color="accent">Next</button></td>
       </tr>
     </table>

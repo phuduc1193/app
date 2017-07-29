@@ -11,7 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 @Injectable()
 export class UserService {
 
-  constructor(private _authHttp: AuthHttp, private _jwt: JwtHelper, private _flashMessagesService: FlashMessagesService, private _router: Router) { }
+  constructor(private _http: Http, private _authHttp: AuthHttp, private _jwt: JwtHelper, private _flashMessagesService: FlashMessagesService, private _router: Router) { }
 
   getProfile() {
     let params = {
@@ -31,5 +31,13 @@ export class UserService {
     var token = localStorage.getItem('token');
     if (token)
       return this._jwt.decodeToken(token).sub;
-}
+  }
+
+  getPhoneTypeList() {
+    return this._http.get(environment.apiUrl + 'common/phonetype').map(res => res.json());
+  }
+
+  getCountryList() {
+    return this._http.get(environment.apiUrl + 'common/country').map(res => res.json());
+  }
 }
