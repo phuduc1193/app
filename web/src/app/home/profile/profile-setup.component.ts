@@ -23,7 +23,7 @@ export class ProfileSetupComponent implements OnInit {
       lastName: ['', Validators.required],
       middleName: new FormControl(),
       email: ['', [Validators.required, ValidationService.emailValidator]],
-      phone: new FormArray([
+      phones: new FormArray([
         this.initPhone()
       ])
     });
@@ -45,12 +45,16 @@ export class ProfileSetupComponent implements OnInit {
   }
 
   addPhone() {
-    const control = <FormArray>this.form.controls['phone'];
+    const control = <FormArray>this.form.controls['phones'];
     control.push(this.initPhone());
   }
 
   removePhone(i: number) {
-    const control = <FormArray>this.form.controls['phone'];
+    const control = <FormArray>this.form.controls['phones'];
     control.removeAt(i);
+  }
+
+  get phones(): FormArray {
+    return this.form.get('phones') as FormArray;
   }
 }

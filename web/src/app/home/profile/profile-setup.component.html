@@ -39,8 +39,8 @@
       </md-input-container>
       <control-message [control]="form.controls.email"></control-message>
 
-      <div formArrayName="phone">
-        <table class="full-width" cellspacing="0" [formGroupName]="i" *ngFor="let phone of form.controls.phone.controls; let i = index">
+      <div formArrayName="phones">
+        <table class="full-width" [formGroupName]="i" cellspacing="0" *ngFor="let phone of phones.controls; let i = index;">
           <tr>
             <td>
               <md-input-container class="full-width input-lg" flex>
@@ -49,7 +49,7 @@
             </td>
             <td>
               <md-select placeholder="Phone Type" formControlName="type">
-                <md-option *ngFor="let type of listPhoneType" [value]="type.name">{{type.name}}</md-option>
+                <md-option *ngFor="let phoneType of listPhoneType" [value]="phoneType.name">{{phoneType.name}}</md-option>
               </md-select>
             </td>
             <td class="text-center">
