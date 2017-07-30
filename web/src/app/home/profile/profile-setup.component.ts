@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ValidationService } from '../../core/validation.service';
-import { PhoneTypeEnum } from '../../shared/enum';
+import { ResourceService } from '../../core/resource.service';
 import { flyInOut } from '../../shared/animations';
 
 @Component({
@@ -15,10 +15,12 @@ export class ProfileSetupComponent implements OnInit {
   basicForm: FormGroup;
   referenceForm: FormGroup;
   step: number;
-  listPhoneType: any = [];
+  listPhoneTypes: any = [];
+  listGenders: any = [];
 
-  constructor(private _fb: FormBuilder) {
-    this.getPhoneType();
+  constructor(private _fb: FormBuilder, private _resource: ResourceService) {
+    this.getPhoneTypes();
+    this.getGenders();
     this.step = 0;
   }
 
@@ -60,12 +62,24 @@ export class ProfileSetupComponent implements OnInit {
     });
   }
 
-  getPhoneType() {
-    for (let item in PhoneTypeEnum) {
-      if (isNaN(Number(item))) {
-        this.listPhoneType.push({name: item});
+  getPhoneTypes() {
+    this._resource.getPhoneTypes().subscribe(
+      response => {
+        response.forEach(element => {
+          this.listPhoneTypes.push(element);
+        });
       }
-    }
+    );
+  }
+
+  getGenders() {
+    this._resource.getGenders().subscribe(
+      response => {
+        response.forEach(element => {
+          this.listGenders.push(element);
+        });
+      }
+    );
   }
 
   addPhone() {

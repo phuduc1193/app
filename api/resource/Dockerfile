@@ -1,6 +1,12 @@
 FROM mongo-express:0.40.0
-ENV DATABASE_URL=mongodb://api-db:27017
-ENV TOKEN_SECRET=qwert1234
+
+ENV PORT=3030
+ENV DATABASE_HOST=resourcedb
+ENV DATABASE_NAME=resource
+ENV DATABASE_USER=user
+ENV DATABASE_PASSWORD=qwerty12345
+ENV DATABASE_PORT=3306
+
 RUN mkdir /api
 WORKDIR /api
 COPY package.json /api
@@ -8,8 +14,6 @@ RUN npm install
 
 COPY . /api
 
-VOLUME . /api
-
-EXPOSE 3000
+EXPOSE 3030
 
 CMD ["npm", "start"]

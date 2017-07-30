@@ -1,9 +1,9 @@
 {
   "name": "resource",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "author": "DucTruong",
   "license": "MIT",
@@ -11,8 +11,7 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.3",
-    "mongoose": "^4.11.2",
-    "mongoose-unique-validator": "^1.0.5",
+    "mysql": "^2.14.0",
     "nodemon": "^1.11.0"
   }
 }

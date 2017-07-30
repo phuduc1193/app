@@ -29,3 +29,13 @@ services:
     build: ./api/mongo-api
     volumes:
       - ./api/mongo-api/db:/data/db/
+  resource:
+    build: ./api/resource
+    links:
+      - resourcedb
+    volumes:
+      - ./api/resource:/api
+  resourcedb:
+    build: ./api/resource/resourcedb
+    volumes:
+      - ./api/resource/resourcedb/db:/var/lib/mysql

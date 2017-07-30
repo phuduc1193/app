@@ -33,12 +33,4 @@ export class UserService {
     if (token)
       return this._jwt.decodeToken(token).sub;
   }
-
-  getPhoneTypeList() {
-    return this._http.get(environment.apiUrl + 'resource/phonetype').map(res => res.json());
-  }
-
-  getCountryList() {
-    return this._http.get(environment.apiUrl + 'resource/country').map(res => res.json());
-  }
 }

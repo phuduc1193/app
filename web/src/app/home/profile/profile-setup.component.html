@@ -40,10 +40,9 @@
             <input mdInput placeholder="Email" formControlName="email">
           </md-input-container>
         </td>
-        <td>
+        <td class="text-right">
           <md-radio-group formControlName="gender" class="input-lg">
-            <md-radio-button value="Male" style="margin-right: 1.5em">Male</md-radio-button>
-            <md-radio-button value="Female">Female</md-radio-button>
+            <md-radio-button *ngFor="let gender of listGenders" [value]="gender.name" style="margin: 0 3em 0 0">{{gender.name}}</md-radio-button>
           </md-radio-group>
         </td>
       </tr><tr>
@@ -65,7 +64,7 @@
             </td>
             <td>
               <md-select placeholder="Phone Type" formControlName="type">
-                <md-option *ngFor="let phoneType of listPhoneType" [value]="phoneType.name">{{phoneType.name}}</md-option>
+                <md-option *ngFor="let phoneType of listPhoneTypes" [value]="phoneType.name">{{phoneType.name}}</md-option>
               </md-select>
             </td>
             <td>
