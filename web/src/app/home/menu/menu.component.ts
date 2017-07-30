@@ -17,12 +17,10 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    let storage = localStorage.getItem('profile');
-    if (storage){
-      this.profile = this.jwtHelper.decodeToken(storage);
+    let profile = localStorage.getItem('profile');
+    if (profile){
+      this.profile = this.jwtHelper.decodeToken(profile);
       this.greetings = "Hi " + this.profile.name;
-    } else {
-      
     }
   }
 

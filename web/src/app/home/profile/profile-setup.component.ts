@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ValidationService } from '../../core/validation.service';
 import { ResourceService } from '../../core/resource.service';
+import { UserService } from '../user/user.service';
 
 import { flyInOut } from '../../shared/animations';
 
@@ -21,7 +22,7 @@ export class ProfileSetupComponent implements OnInit {
   listCountries: any = [];
   listRelationshipStatus: any = [];
 
-  constructor(private _fb: FormBuilder, private _resource: ResourceService) {
+  constructor(private _fb: FormBuilder, private _resource: ResourceService, private _userService: UserService) {
     this.getPhoneTypes();
     this.getGenders();
     this.getCountries();
@@ -42,6 +43,7 @@ export class ProfileSetupComponent implements OnInit {
     });
 
     this.referenceForm = this._fb.group({
+      nickname: new FormControl(),
       dob: ['', Validators.required],
       status: new FormControl(),
       addresses: new FormArray([
@@ -137,5 +139,11 @@ export class ProfileSetupComponent implements OnInit {
         });
       }
     );
+  }
+
+  save() {
+    let params = {};
+    Object.assign(params, this.basicForm.value, this.referenceForm.value);
+    this._userService.saveProfile(params);
   }
 }

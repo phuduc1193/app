@@ -99,16 +99,28 @@
         <tr>
           <td>
             <md-input-container class="full-width input-lg" flex>
+              <input mdInput placeholder="Nickname" formControlName="nickname">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="input-lg" flex>
               <input mdInput [mdDatepicker]="dob" placeholder="Date of Birth" formControlName="dob">
               <button mdSuffix [mdDatepickerToggle]="dob"></button>
             </md-input-container>
           </td>
           <td>
             <md-datepicker #dob></md-datepicker>
-            <md-select placeholder="Relationship Status" formControlName="status" class="third-quarter-width input-lg">
+            <md-select placeholder="Relationship Status" formControlName="status" class="full-width input-lg">
               <md-option *ngFor="let status of listRelationshipStatus" [value]="status.status">{{status.status}}</md-option>
             </md-select>
           </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td style="padding-left:40px">
+            <control-message [control]="referenceForm.controls.dob"></control-message>
+          </td>
+          <td></td>
         </tr>
       </table>
 
@@ -145,6 +157,7 @@
                   <input mdInput auto-complete placeholder="Country" formControlName="region" [source]="listCountries"/>
                 </md-input-container>
               </td>
+              <td style="width: 135px"></td>
             </tr>
           </table>
         </div>
@@ -153,7 +166,7 @@
     <table class="full-width">
       <tr>
         <td><button md-raised-button (click)="setStep(0)">Back</button></td>
-        <td><button md-raised-button (click)="setStep(2)" [disabled]="!referenceForm.valid" color="accent">Next</button></td>
+        <td><button md-raised-button (click)="save()" [disabled]="!referenceForm.valid" color="accent">Save</button></td>
       </tr>
     </table>
   </md-card-content>

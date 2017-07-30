@@ -12,11 +12,12 @@ var UserSchema = new Schema({
   name: BaseSchema.name,
   dob: Date,
   relationship_status: String,
-  address: [BaseSchema.address],
-  organization: [BaseSchema.organization],
-  phone: [BaseSchema.phone],
-  relation: [BaseSchema.relation],
+  addresses: [BaseSchema.address],
+  organizations: [BaseSchema.organization],
+  phones: [BaseSchema.phone],
+  relations: [BaseSchema.relation],
   gender: BaseSchema.gender,
+  nickname: String,
   introduction: String,
   url: BaseSchema.unique
 });

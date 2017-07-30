@@ -20,11 +20,30 @@ export class UserService {
     };
     this._authHttp.post(environment.authAPI + 'users/profile', params)
       .map(res => res.json()).subscribe(
-        (data) => {
+        data => {
           if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code == 40410)
             this._flashMessagesService.show(data.status.message);
         },
         err => this._auth.logout()
+      );
+  }
+
+  saveProfile(params) {
+    Object.assign(params, {
+      unique: this.authId()
+    });
+    this._authHttp.post(environment.authAPI + 'users/save', params)
+      .map(res => res.json()).subscribe(
+        data => {
+          if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code !== 200)
+            this._flashMessagesService.show(data.status.message);
+          else {
+            localStorage.setItem('profile', data.data.profile);
+            this._flashMessagesService.show(data.status.message);
+            this._router.navigate(['/profile']);
+          }
+        },
+        err => console.log(err)
       );
   }
 

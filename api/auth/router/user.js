@@ -4,6 +4,8 @@ var express    = require('express'),
     userRouter = express.Router(),
     service    = require('../common/service'),
     passport   = require('../common/passport'),
+    jwtOptions  = require('../common/jwt-options'),
+    jwt         = require('jsonwebtoken'),
     User       = require('../schema/user');
 
 userRouter.get('/', function (req, res, next) {
@@ -24,8 +26,42 @@ userRouter.post('/profile', passport.authenticate('jwt', { session: false }), fu
   });
 });
 
-userRouter.post('/', passport.authenticate('jwt', { session: false }), function (req, res, next) {
-  
+userRouter.post('/save', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+  var params = req.body;
+  var query = { 'auth_id': params.unique },
+      update = {
+        email: params.email,
+        dob: params.dob,
+        name: {
+          first: params.firstName,
+          last: params.lastName,
+          middle: params.middleName
+        },
+        nickname: params.nickname,
+        relationship_status: params.status,
+        gender: params.gender,
+        phones: params.phones,
+        addresses: params.addresses
+      },
+      options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  var payload = {
+        name: params.firstName + ' ' + params.lastName,
+        nickname: params.nickname,
+        status: params.status,
+        gender: params.gender,
+        email: params.email
+      },
+      token = jwt.sign(payload, jwtOptions.secretOrKey);
+  User.findOneAndUpdate(query, update, options, function(error, data) {
+    if (error) return next();
+    return res.status(200).jsonp({
+      status: { code: 200, message: "Profile updated"},
+      data: {
+        profile: token
+      }
+    });
+  });
 });
 
 userRouter.put('/', passport.authenticate('jwt', { session: false }), function (req, res, next) {
