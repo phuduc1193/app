@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { ValidationService } from '../../shared/validation.service';
+import { ValidationService } from '../../core/validation.service';
 import { PhoneTypeEnum } from '../../shared/enum';
 import { flyInOut } from '../../shared/animations';
 

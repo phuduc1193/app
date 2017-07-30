@@ -46,7 +46,7 @@ export class AuthService {
     {
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
-      this._router.navigate(['/home']);
+      this._router.navigate(['/']);
     }
   }
 

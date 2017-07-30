@@ -1,13 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MainRouterModule } from './main-router.module';
-import { AuthModule } from './auth/auth.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth-guard.service';
+
+import { MainRouterModule } from './main-router.module';
 import { SharedModule } from './shared/shared.module';
-import { UserService } from './home/user/user.service';
+import { CoreModule } from './core/core.module';
+
+import { AuthModule } from './auth/auth.module';
+import { HomeModule } from './home/home.module';
+
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -18,10 +20,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpModule,
-    AuthModule, MainRouterModule,
-    SharedModule
+    MainRouterModule, SharedModule, CoreModule,
+    AuthModule, HomeModule,
   ],
-  providers: [ AuthService, AuthGuard, UserService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
