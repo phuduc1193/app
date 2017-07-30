@@ -5,7 +5,7 @@ import { ValidationService } from '../core/validation.service';
 @Component({
   selector: 'control-message',
   template: `<div *ngIf="errorMessage != null">{{errorMessage}}</div>`,
-  styles: ['div { text-align: left; padding-bottom: 2em; color: #777; text-justify: inter-word; }']
+  styles: ['div { text-align: left; padding-bottom: 1em; color: #777; text-justify: inter-word; margin-top: -10px; }']
 })
 export class ControlMessage {
 

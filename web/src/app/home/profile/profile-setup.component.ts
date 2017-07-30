@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ValidationService } from '../../core/validation.service';
 import { ResourceService } from '../../core/resource.service';
+
 import { flyInOut } from '../../shared/animations';
 
 @Component({
@@ -17,10 +18,12 @@ export class ProfileSetupComponent implements OnInit {
   step: number;
   listPhoneTypes: any = [];
   listGenders: any = [];
+  listCountries: any = [];
 
   constructor(private _fb: FormBuilder, private _resource: ResourceService) {
     this.getPhoneTypes();
     this.getGenders();
+    this.getCountries();
     this.step = 0;
   }
 
@@ -35,11 +38,13 @@ export class ProfileSetupComponent implements OnInit {
         this.initPhone()
       ])
     });
+
     this.referenceForm = this._fb.group({
       addresses: new FormArray([
         this.initAddress()
       ])
     });
+
   }
 
   setStep(step: number) {
@@ -60,26 +65,6 @@ export class ProfileSetupComponent implements OnInit {
       postal_code: new FormControl(),
       region: new FormControl()
     });
-  }
-
-  getPhoneTypes() {
-    this._resource.getPhoneTypes().subscribe(
-      response => {
-        response.forEach(element => {
-          this.listPhoneTypes.push(element);
-        });
-      }
-    );
-  }
-
-  getGenders() {
-    this._resource.getGenders().subscribe(
-      response => {
-        response.forEach(element => {
-          this.listGenders.push(element);
-        });
-      }
-    );
   }
 
   addPhone() {
@@ -108,5 +93,35 @@ export class ProfileSetupComponent implements OnInit {
 
   get addresses(): FormArray {
     return this.referenceForm.get('addresses') as FormArray;
+  }
+
+  getPhoneTypes() {
+    this._resource.getPhoneTypes().subscribe(
+      response => {
+        response.forEach(element => {
+          this.listPhoneTypes.push(element);
+        });
+      }
+    );
+  }
+
+  getGenders() {
+    this._resource.getGenders().subscribe(
+      response => {
+        response.forEach(element => {
+          this.listGenders.push(element);
+        });
+      }
+    );
+  }
+
+  getCountries() {
+    this._resource.getCountries().subscribe(
+      response => {
+        response.forEach(element => {
+          this.listCountries.push(element.name);
+        });
+      }
+    );
   }
 }

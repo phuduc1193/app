@@ -12,24 +12,24 @@ body {
 }
 
 .text-center {
-  text-align: center;
-  vertical-align: center;
+  text-align: center !important;
+  vertical-align: center !important;
 }
 
 .text-right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .text-left {
-  text-align: left;
+  text-align: left !important;
 }
 
 .full-width {
-  width: 100%;
+  width: 100% !important;
 }
 
 .half-width {
-  width: 100%;
+  width: 50% !important;
 }
 
 .form-container-sm {
@@ -87,4 +87,8 @@ select:focus,
 textarea:focus,
 button:focus {
   outline: none;
+}
+
+.ngui-auto-complete > ul {
+  max-height: 50vh !important;
 }
