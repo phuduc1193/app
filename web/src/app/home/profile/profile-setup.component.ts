@@ -133,7 +133,7 @@ export class ProfileSetupComponent implements OnInit {
     this._resource.getRelationshipStatus().subscribe(
       response => {
         response.forEach(element => {
-          this.listRelationshipStatus.push(element.name);
+          this.listRelationshipStatus.push(element);
         });
       }
     );
