@@ -6,7 +6,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
-import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule, MdMenuModule, MdSelectModule, MdRadioModule, MdGridListModule, MdAutocompleteModule } from '@angular/material';
+import { MdButtonModule, MdCardModule, MdIconModule, MdInputModule, MdMenuModule, MdSelectModule, MdRadioModule, MdGridListModule, MdDatepickerModule, MdNativeDateModule } from '@angular/material';
 
 import { ControlMessage } from './control-message.component';
 import { PageNotFoundComponent } from './not-found.component';
@@ -19,13 +19,13 @@ import { PageNotFoundComponent } from './not-found.component';
     CommonModule,
     FlashMessagesModule,
     FormsModule, ReactiveFormsModule, NguiAutoCompleteModule,
-    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule, MdRadioModule, MdGridListModule, MdAutocompleteModule
+    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule, MdRadioModule, MdGridListModule, MdDatepickerModule, MdNativeDateModule
   ],
   exports: [
     ControlMessage, PageNotFoundComponent,
     FlashMessagesModule,
     FormsModule, ReactiveFormsModule, NguiAutoCompleteModule,
-    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule, MdRadioModule, MdGridListModule, MdAutocompleteModule
+    MdMenuModule, MdButtonModule, MdIconModule, MdCardModule, MdInputModule, MdSelectModule, MdRadioModule, MdGridListModule, MdDatepickerModule, MdNativeDateModule
   ]
 })
 export class SharedModule { }

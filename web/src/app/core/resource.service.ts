@@ -18,4 +18,8 @@ export class ResourceService {
   getCountries() {
     return this._http.get(environment.resourceUrl + 'countries').map(res => res.json());
   }
+
+  getRelationshipStatus() {
+    return this._http.get(environment.resourceUrl + 'relationshipstatus').map(res => res.json());
+  }
 }

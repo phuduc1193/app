@@ -112,6 +112,23 @@ class Repository {
     });
   }
 
+  getRelationshipStatus() {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT status, preposition, mark FROM apps_relationship_status', (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the relationship status: " + err));
+        }
+
+        resolve((results || []).map((status) => {
+          return status;
+        }));
+
+      });
+
+    });
+  }
+
   disconnect() {
     this.connection.end();
   }

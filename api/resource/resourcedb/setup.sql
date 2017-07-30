@@ -1,7 +1,6 @@
 --
 -- Genders
 --
-
 DROP TABLE IF EXISTS apps_genders;
 CREATE TABLE apps_genders (
 `id` int(2) NOT NULL auto_increment,
@@ -15,7 +14,6 @@ INSERT INTO `apps_genders` VALUES (null, 'Female');
 --
 -- Phone Types
 --
-
 DROP TABLE IF EXISTS apps_phone_types;
 CREATE TABLE apps_phone_types (
 `id` int(2) NOT NULL auto_increment,
@@ -30,9 +28,30 @@ INSERT INTO `apps_phone_types` VALUES (null, 'Other');
 
 
 --
+-- Relationship Status
+--
+DROP TABLE IF EXISTS apps_relationship_status;
+CREATE TABLE apps_relationship_status (
+`id` int(2) NOT NULL auto_increment,
+`status` varchar(100) NOT NULL default '',
+`preposition` varchar(10) NULL default '',
+`mark` varchar(20) NULL default '',
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `apps_relationship_status` VALUES (null, 'Single', null, null);
+INSERT INTO `apps_relationship_status` VALUES (null, 'In a relationship', 'With', 'Anniversary');
+INSERT INTO `apps_relationship_status` VALUES (null, 'Engaged', 'To', 'Since');
+INSERT INTO `apps_relationship_status` VALUES (null, 'Married', 'To', 'Anniversary');
+INSERT INTO `apps_relationship_status` VALUES (null, 'It\'s complicated', 'With', 'Since');
+INSERT INTO `apps_relationship_status` VALUES (null, 'In open relationship', 'With', 'Anniversary');
+INSERT INTO `apps_relationship_status` VALUES (null, 'Separated', null, 'Since');
+INSERT INTO `apps_relationship_status` VALUES (null, 'Divorced', null, 'Since');
+INSERT INTO `apps_relationship_status` VALUES (null, 'Widowed', null, 'Since');
+
+--
 -- Countries
 --
-
 DROP TABLE IF EXISTS apps_countries;
 CREATE TABLE apps_countries (
 `id` int(11) NOT NULL auto_increment,

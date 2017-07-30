@@ -19,11 +19,13 @@ export class ProfileSetupComponent implements OnInit {
   listPhoneTypes: any = [];
   listGenders: any = [];
   listCountries: any = [];
+  listRelationshipStatus: any = [];
 
   constructor(private _fb: FormBuilder, private _resource: ResourceService) {
     this.getPhoneTypes();
     this.getGenders();
     this.getCountries();
+    this.getRelationshipStatus();
     this.step = 0;
   }
 
@@ -40,6 +42,8 @@ export class ProfileSetupComponent implements OnInit {
     });
 
     this.referenceForm = this._fb.group({
+      dob: ['', Validators.required],
+      status: new FormControl(),
       addresses: new FormArray([
         this.initAddress()
       ])
@@ -120,6 +124,16 @@ export class ProfileSetupComponent implements OnInit {
       response => {
         response.forEach(element => {
           this.listCountries.push(element.name);
+        });
+      }
+    );
+  }
+
+  getRelationshipStatus() {
+    this._resource.getRelationshipStatus().subscribe(
+      response => {
+        response.forEach(element => {
+          this.listRelationshipStatus.push(element.name);
         });
       }
     );

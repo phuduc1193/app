@@ -95,6 +95,26 @@
   </md-card-title>
   <md-card-content class="text-center">
     <form novalidate [formGroup]="referenceForm">
+      <table class="full-width">
+        <tr>
+          <td>
+            <md-input-container class="full-width input-lg" flex>
+              <input mdInput [mdDatepicker]="dob" placeholder="Date of Birth" formControlName="dob">
+              <button mdSuffix [mdDatepickerToggle]="dob"></button>
+            </md-input-container>
+          </td>
+          <td>
+            <md-datepicker #dob></md-datepicker>
+            <md-select placeholder="Relationship Status" formControlName="status" class="third-quarter-width input-lg">
+              <md-option *ngFor="let status of listRelationshipStatus" [value]="status.status">{{status.status}}</md-option>
+            </md-select>
+          </td>
+        </tr>
+      </table>
+
+      <md-card-title class="text-left">
+        <small style="margin: 30px auto">Address</small>
+      </md-card-title>
       <div formArrayName="addresses">
         <div [formGroupName]="i" *ngFor="let address of addresses.controls; let i = index;">
           <md-grid-list cols="12" rowHeight="75px">

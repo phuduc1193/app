@@ -15,4 +15,11 @@ module.exports = (app, options) => {
     })
     .catch(next);
   });
+
+  app.get('/resource/relationshipstatus', (req, res, next) => {
+    options.repository.getRelationshipStatus().then((status) => {
+      res.status(200).send(status);
+    })
+    .catch(next);
+  });
 };

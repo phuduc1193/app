@@ -8,7 +8,6 @@ body {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
 }
 
 .text-center {
@@ -30,6 +29,10 @@ body {
 
 .half-width {
   width: 50% !important;
+}
+
+.third-quarter-width {
+  width: 75% !important;
 }
 
 .form-container-sm {
@@ -90,5 +93,5 @@ button:focus {
 }
 
 .ngui-auto-complete > ul {
-  max-height: 50vh !important;
+  max-height: 30vh !important;
 }
