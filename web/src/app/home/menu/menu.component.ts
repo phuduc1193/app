@@ -9,13 +9,13 @@ import { UserService } from '../user/user.service';
 })
 export class MenuComponent implements OnInit {
   greetings: string;
+  profile: any;
 
-  constructor(private _authService: AuthService, private _userService: UserService) {
-    this.greetings = "Let's get you setup"
-  }
+  constructor(private _authService: AuthService, private _userService: UserService) { }
 
   ngOnInit() {
     this._userService.greetingsMessage.subscribe(message => this.greetings = message);
+    this.profile = localStorage.getItem('profile');
   }
 
   logout() {

@@ -24,8 +24,11 @@ export class UserService {
     this._authHttp.post(environment.authAPI + 'users/profile', params)
       .map(res => res.json()).subscribe(
         data => {
-          if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code == 40410)
+          if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code == 40410) {
             this._flashMessagesService.show(data.status.message);
+            if (localStorage.getItem('profile'))
+              localStorage.removeItem('profile');
+          }
           if (data.status.code === 200 && typeof(data) !== 'undefined' && typeof(data.data.profile) !== 'undefined') {
             localStorage.setItem('profile', data.data.profile);
             let greetingName = this._jwt.decodeToken(data.data.profile).name;
