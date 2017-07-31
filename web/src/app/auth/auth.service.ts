@@ -3,11 +3,7 @@ import { environment } from '../../environments/environment';
 import { FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
-
-import 'rxjs/add/operator/map';
-
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Injectable()
@@ -35,6 +31,8 @@ export class AuthService {
     if (this.isLoggedIn()) {
       localStorage.removeItem('token');
       localStorage.removeItem('refresh_token');
+      if (localStorage.getItem('profile'))
+        localStorage.removeItem('profile');
       this._router.navigate(['/login']);
     }
   }

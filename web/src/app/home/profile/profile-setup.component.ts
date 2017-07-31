@@ -53,54 +53,6 @@ export class ProfileSetupComponent implements OnInit {
 
   }
 
-  setStep(step: number) {
-    this.step = step;
-  }
-
-  initPhone() {
-    return this._fb.group({
-      value: ['', [Validators.required, ValidationService.phoneValidator]],
-      type: ['', Validators.required]
-    });
-  }
-
-  initAddress() {
-    return this._fb.group({
-      street: new FormControl(),
-      locality: new FormControl(),
-      postal_code: new FormControl(),
-      region: new FormControl()
-    });
-  }
-
-  addPhone() {
-    const control = <FormArray>this.basicForm.controls['phones'];
-    control.push(this.initPhone());
-  }
-
-  removePhone(i: number) {
-    const control = <FormArray>this.basicForm.controls['phones'];
-    control.removeAt(i);
-  }
-
-  addAddress() {
-    const control = <FormArray>this.referenceForm.controls['addresses'];
-    control.push(this.initAddress());
-  }
-
-  removeAddress(i: number) {
-    const control = <FormArray>this.referenceForm.controls['addresses'];
-    control.removeAt(i);
-  }
-
-  get phones(): FormArray {
-    return this.basicForm.get('phones') as FormArray;
-  }
-
-  get addresses(): FormArray {
-    return this.referenceForm.get('addresses') as FormArray;
-  }
-
   getPhoneTypes() {
     this._resource.getPhoneTypes().subscribe(
       response => {
@@ -139,6 +91,54 @@ export class ProfileSetupComponent implements OnInit {
         });
       }
     );
+  }
+
+  setStep(step: number) {
+    this.step = step;
+  }
+
+  initPhone() {
+    return this._fb.group({
+      value: ['', [Validators.required, ValidationService.phoneValidator]],
+      type: ['', Validators.required]
+    });
+  }
+
+  addPhone() {
+    const control = <FormArray>this.basicForm.controls['phones'];
+    control.push(this.initPhone());
+  }
+
+  removePhone(i: number) {
+    const control = <FormArray>this.basicForm.controls['phones'];
+    control.removeAt(i);
+  }
+
+  get phones(): FormArray {
+    return this.basicForm.get('phones') as FormArray;
+  }
+
+  initAddress() {
+    return this._fb.group({
+      street: new FormControl(),
+      locality: new FormControl(),
+      postal_code: new FormControl(),
+      region: new FormControl()
+    });
+  }
+
+  addAddress() {
+    const control = <FormArray>this.referenceForm.controls['addresses'];
+    control.push(this.initAddress());
+  }
+
+  removeAddress(i: number) {
+    const control = <FormArray>this.referenceForm.controls['addresses'];
+    control.removeAt(i);
+  }
+
+  get addresses(): FormArray {
+    return this.referenceForm.get('addresses') as FormArray;
   }
 
   save() {

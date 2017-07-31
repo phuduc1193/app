@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { JwtHelper } from 'angular2-jwt';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,20 +8,14 @@ import { JwtHelper } from 'angular2-jwt';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  jwtHelper: JwtHelper = new JwtHelper();
-  profile: any;
   greetings: string;
 
-  constructor(private _authService: AuthService) {
+  constructor(private _authService: AuthService, private _userService: UserService) {
     this.greetings = "Let's get you setup"
   }
 
   ngOnInit() {
-    let profile = localStorage.getItem('profile');
-    if (profile){
-      this.profile = this.jwtHelper.decodeToken(profile);
-      this.greetings = "Hi " + this.profile.name;
-    }
+    this._userService.greetingsMessage.subscribe(message => this.greetings = message);
   }
 
   logout() {

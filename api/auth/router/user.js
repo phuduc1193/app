@@ -20,8 +20,17 @@ userRouter.post('/profile', passport.authenticate('jwt', { session: false }), fu
   User.findOne({ 'auth_id': req.body.unique }, function (err, data) {
     if (err)
       return next();
-    if (data)
-      return service.response(res, data);
+    if (data) {
+      var payload = {
+            name: data.name.first + ' ' + data.name.last,
+            nickname: data.nickname,
+            status: data.status,
+            gender: data.gender,
+            email: data.email
+          },
+          profile = jwt.sign(payload, jwtOptions.secretOrKey);
+      return service.response(res, {profile: profile});
+    }
     return res.status(200).jsonp({ status: { code: 40410, message: "Please setup your profile"}});
   });
 });
