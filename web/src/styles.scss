@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "flexbox.min.css";
+
 body {
   background: #f7f6f6;
   color: lighten(black, 40%);
@@ -23,49 +25,18 @@ body {
   text-align: left !important;
 }
 
-.full-width {
-  width: 100% !important;
-}
-
-.half-width {
-  width: 50% !important;
-}
-
-.third-quarter-width {
-  width: 75% !important;
-}
-
-.form-container-sm {
-  width: 500px;
-  margin: 120px auto;
-}
-
-.form-container-md {
-  width: 720px;
-  margin: 100px auto;
-}
-
-.form-container-lg {
-  width: 970px;
-  margin: 120px auto;
-}
-
-.form-container-full {
-  width: 95%;
-  margin: 120px auto;
-}
-
 .fixed-form {
-    z-index: 1 !important;
-    position: fixed !important;
-    left: calc(-50vw + 50%) !important;
-    right: calc(-50vw + 50%) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
+  z-index: 1 !important;
+  position: fixed !important;
+  top: 15vh !important;
+  left: calc(-50vw + 50%) !important;
+  right: calc(-50vw + 50%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
 .input-lg {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .flash-messages {
@@ -95,3 +66,4 @@ button:focus {
 .ngui-auto-complete > ul {
   max-height: 30vh !important;
 }
+

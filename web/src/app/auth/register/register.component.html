@@ -1,29 +1,28 @@
-<md-card class="form-container-sm fixed-form" [@flyInOut]>
+<md-card class="container-sm fixed-form" [@flyInOut]>
   <md-card-title>
     {{ message }}
   </md-card-title>
-  <md-card-content class="text-center">
-    <form novalidate [formGroup]="form">
-      <md-input-container class="full-width input-lg" flex>
+  <md-card-content>
+    <form novalidate [formGroup]="form" class="row middle-xs">
+      <md-input-container class="col-xs-12 input-lg" flex>
         <input mdInput placeholder="Username" formControlName="username">
       </md-input-container>
-      <control-message [control]="form.controls.username"></control-message>
+      <control-message class="col-xs-12" [control]="form.controls.username"></control-message>
 
-      <md-input-container class="full-width input-lg" flex>
+      <md-input-container class="col-xs-12 input-lg" flex>
         <input mdInput type="password" placeholder="Password" formControlName="password">
       </md-input-container>
-      <control-message [control]="form.controls.password"></control-message>
+      <control-message class="col-xs-12" [control]="form.controls.password"></control-message>
 
-      <md-input-container class="full-width input-lg" flex>
+      <md-input-container class="col-xs-12 input-lg" flex>
         <input mdInput type="password" placeholder="Confirm Password" formControlName="confirm">
       </md-input-container>
-      <control-message [control]="form.controls.confirm"></control-message>
+      <control-message class="col-xs-12" [control]="form.controls.confirm"></control-message>
     </form>
-    <table class="full-width">
-      <tr>
-        <td><button md-raised-button [disabled]="!form.valid" (click)="register()" color="primary">Register</button></td>
-        <td><button md-raised-button routerLink="/login">Cancel</button></td>
-      </tr>
-    </table>
+
+    <div class="row around-xs">
+      <button md-raised-button [disabled]="!form.valid" (click)="register()" color="primary">Register</button>
+      <button md-raised-button routerLink="/login">Cancel</button>
+    </div>
   </md-card-content>
 </md-card>
