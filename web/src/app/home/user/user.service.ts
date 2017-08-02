@@ -30,12 +30,16 @@ export class UserService {
               localStorage.removeItem('profile');
           }
           if (data.status.code === 200 && typeof(data) !== 'undefined' && typeof(data.data.profile) !== 'undefined') {
-            localStorage.setItem('profile', data.data.profile);
-            let greetingName = this._jwt.decodeToken(data.data.profile).name;
-            this.changeGreetingsMessage("Hi " + greetingName);
+            this.updateProfileStorage(data.data.profile);
           }
         }
       );
+  }
+
+  updateProfileStorage(profile: any) {
+    localStorage.setItem('profile', profile);
+    let greetingName = this._jwt.decodeToken(profile).name;
+    this.changeGreetingsMessage("Hi " + greetingName);
   }
 
   saveProfile(params) {
@@ -48,7 +52,7 @@ export class UserService {
           if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code !== 200)
             this._flashMessagesService.show(data.status.message);
           else {
-            localStorage.setItem('profile', data.data.profile);
+            this.updateProfileStorage(data.data.profile)
             this._flashMessagesService.show(data.status.message);
             this._router.navigate(['/profile']);
           }
