@@ -31,3 +31,4 @@
 
 /api/resource/node_modules
 /api/resource/resourcedb/db/*
+web/package-lock.json

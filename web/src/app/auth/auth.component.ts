@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { tokenNotExpired } from 'angular2-jwt';
 import { fadeOut } from '../shared/animations';
+import { StorageService } from '../core/storage.service';
 
 @Component({
   selector: 'app-auth',
@@ -16,11 +16,11 @@ import { fadeOut } from '../shared/animations';
 
 export class AuthComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _storage: StorageService) { }
 
   ngOnInit() {
-    if (tokenNotExpired())
-      this._router.navigate(['/home']);
+    if (this._storage.isLoggedIn())
+      this._router.navigate(['/']);
     else this._router.navigate(['/login']);
   }
 

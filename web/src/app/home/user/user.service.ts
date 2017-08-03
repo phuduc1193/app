@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { Http } from '@angular/http';
-import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AuthHttp } from 'angular2-jwt';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
+import { StorageService } from '../../core/storage.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class UserService {
   private _greetingsMessage = new BehaviorSubject<string>("Let's get you setup");
   greetingsMessage = this._greetingsMessage.asObservable();
 
-  constructor(private _http: Http, private _authHttp: AuthHttp, private _jwt: JwtHelper, private _flashMessagesService: FlashMessagesService, private _router: Router) { }
+  constructor(private _router: Router, private _authHttp: AuthHttp, private _flashMessagesService: FlashMessagesService, private _storage: StorageService) { }
 
   changeGreetingsMessage(message: string) {
     this._greetingsMessage.next(message);
+  }
+
+  updateProfileStorage(profile: string) {
+    this._storage.setCookie('profile', profile);
+    let profileObject = this._storage.getCookieJwtObject('profile');
+    let greetingName = profileObject.name;
+    this.changeGreetingsMessage("Hi " + greetingName);
   }
 
   getProfile() {
@@ -26,20 +34,13 @@ export class UserService {
         data => {
           if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code == 40410) {
             this._flashMessagesService.show(data.status.message);
-            if (localStorage.getItem('profile'))
-              localStorage.removeItem('profile');
+            this._storage.removeCookie('profile');
           }
           if (data.status.code === 200 && typeof(data) !== 'undefined' && typeof(data.data.profile) !== 'undefined') {
             this.updateProfileStorage(data.data.profile);
           }
         }
       );
-  }
-
-  updateProfileStorage(profile: any) {
-    localStorage.setItem('profile', profile);
-    let greetingName = this._jwt.decodeToken(profile).name;
-    this.changeGreetingsMessage("Hi " + greetingName);
   }
 
   saveProfile(params) {
@@ -61,9 +62,8 @@ export class UserService {
       );
   }
 
-  authId() {
-    var token = localStorage.getItem('token');
-    if (token)
-      return this._jwt.decodeToken(token).sub;
+  authId(): string {
+    let tokenObject = this._storage.getCookieJwtObject('token');
+    return tokenObject.sub;
   }
 }

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { FormGroup } from '@angular/forms';
-import { Http } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { environment } from '../../environments/environment';
+import { StorageService } from '../core/storage.service';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private _http: Http, private _flashMessagesService: FlashMessagesService, private _router: Router) { }
+  constructor(private _http: Http, private _router: Router, private _flashMessagesService: FlashMessagesService, private _storage: StorageService) { }
 
   login(_form: FormGroup) {
     this._http.post(environment.authAPI + 'auth/login', _form.value)
@@ -28,13 +29,8 @@ export class AuthService {
   }
 
   logout() {
-    if (this.isLoggedIn()) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('refresh_token');
-      if (localStorage.getItem('profile'))
-        localStorage.removeItem('profile');
-      this._router.navigate(['/login']);
-    }
+    this._storage.clear();
+    this._router.navigate(['/login']);
   }
 
   handleResponse(response: any) {
@@ -42,8 +38,7 @@ export class AuthService {
         typeof(response.data.access_token) !== 'undefined' &&
         typeof(response.data.refresh_token) !== 'undefined')
     {
-      localStorage.setItem('token', response.data.access_token);
-      localStorage.setItem('refresh_token', response.data.refresh_token);
+      this._storage.setToken(response.data.access_token, response.data.refresh_token)
       this._router.navigate(['/']);
     }
   }
@@ -51,12 +46,5 @@ export class AuthService {
   handleError(error: any) {
     var err = JSON.parse(error._body);
     this._flashMessagesService.show(err.status.message);
-  }
-
-  isLoggedIn() {
-    if (localStorage.getItem('token') && localStorage.getItem('refresh_token') && tokenNotExpired()) {
-      return true;
-    }
-    return false;
   }
 }
