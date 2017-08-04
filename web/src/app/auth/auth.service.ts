@@ -28,11 +28,6 @@ export class AuthService {
         );
   }
 
-  logout() {
-    this._storage.clear();
-    this._router.navigate(['/login']);
-  }
-
   handleResponse(response: any) {
     if ((response.status.code === 200 || response.status.code === 201) &&
         typeof(response.data.access_token) !== 'undefined' &&
