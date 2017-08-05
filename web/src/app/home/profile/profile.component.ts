@@ -13,7 +13,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profile = this._storage.getCookieJwtObject('profile');
-    console.log(this.profile);
+    if (typeof (this.profile.introduction) == 'undefined')
+      console.log(this.profile);
   }
 
 }
