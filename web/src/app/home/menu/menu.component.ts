@@ -10,13 +10,18 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   greetings: string;
-  profile: any;
+  needSetup: any;
 
-  constructor(private _router: Router, private _userService: UserService, private _storage: StorageService) { }
+  constructor(private _router: Router, private _userService: UserService, private _storage: StorageService) {
+    this.needSetup = true;
+  }
 
   ngOnInit() {
-    this._userService.greetingsMessage.subscribe(message => this.greetings = message);
-    this.profile = this._storage.getCookieJwtObject('profile');
+    this._userService.greetingsMessage.subscribe(message => {
+      this.greetings = message;
+      if (message.includes("Hi "))
+        this.needSetup = false;
+    });
   }
 
   logout() {

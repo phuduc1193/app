@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../../core/storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  profile: any;
 
-  constructor() { }
+  constructor(private _storage: StorageService) { }
 
   ngOnInit() {
+    this.profile = this._storage.getCookieJwtObject('profile');
+    console.log(this.profile);
   }
 
 }

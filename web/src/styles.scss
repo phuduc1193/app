@@ -3,6 +3,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "flexbox.min.css";
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   background: #f7f6f6;
   color: lighten(black, 40%);

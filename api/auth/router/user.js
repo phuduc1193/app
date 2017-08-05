@@ -26,7 +26,8 @@ userRouter.post('/profile', passport.authenticate('jwt', { session: false }), fu
             nickname: data.nickname,
             status: data.status,
             gender: data.gender,
-            email: data.email
+            email: data.email,
+            locality: data.addresses[0].locality + ', ' + data.addresses[0].region
           },
           profile = jwt.sign(payload, jwtOptions.secretOrKey);
       return service.response(res, {profile: profile});
