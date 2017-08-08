@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 
 class Repository {
+  private connection;
   constructor(connection) {
     this.connection = connection
   }

@@ -1,5 +1,3 @@
-'use strict';
-
 var server = require('./config/server');
 var config = require('./config/config');
 var repository = require('./repository/repository');

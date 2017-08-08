@@ -34,7 +34,7 @@ services:
     links:
       - resourcedb
     volumes:
-      - ./api/resource/src:/api
+      - ./api/resource:/api
   resourcedb:
     build: ./api/resource/resourcedb
     volumes:
