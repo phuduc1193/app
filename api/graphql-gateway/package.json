@@ -1,19 +1,20 @@
 {
-  "name": "resource",
+  "name": "graphql-gateway",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon dist/index.js"
   },
-  "author": "DucTruong",
+  "author": "Duc Truong",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "cors": "^2.8.4",
-    "express": "^4.15.3",
-    "mysql": "^2.14.0",
-    "nodemon": "^1.11.0",
-    "gulp": "^3.9.1"
+    "express": "^4.15.4",
+    "express-graphql": "^0.6.7",
+    "graphql": "^0.10.5",
+    "gulp": "3.9.1",
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.4",

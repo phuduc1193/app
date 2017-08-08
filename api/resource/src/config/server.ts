@@ -1,5 +1,5 @@
-var express = require('express'),
-    cors    = require('cors');
+const express = require('express'),
+      cors    = require('cors');
 
 module.exports.start = (options) => {
 
@@ -8,13 +8,13 @@ module.exports.start = (options) => {
     if(!options.repository) throw new Error("A server must be started with a connected repository.");
     if(!options.port) throw new Error("A server must be started with a port.");
 
-    var app = express();
+    const app = express();
     app.use(cors());
 
     require('../api/countries')(app, options);
     require('../api/common')(app, options);
 
-    var server = app.listen(options.port, () => {
+    const server = app.listen(options.port, () => {
       resolve(server);
     });
 

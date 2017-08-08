@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private _http: Http, private _router: Router, private _flashMessagesService: FlashMessagesService, private _storage: StorageService) { }
 
   login(_form: FormGroup) {
-    this._http.post(environment.authAPI + 'auth/login', _form.value)
+    this._http.post(environment.apiUrl + 'auth/login', _form.value)
         .map(res => res.json()).subscribe(
           response => this.handleResponse(response),
           error => this.handleError(error)
@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   register(_form: FormGroup) {
-    this._http.post(environment.authAPI + 'auth/register', _form.value)
+    this._http.post(environment.apiUrl + 'auth/register', _form.value)
         .map(res => res.json()).subscribe(
           response => this.handleResponse(response),
           error => this.handleError(error)

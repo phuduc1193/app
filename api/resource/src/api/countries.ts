@@ -1,8 +1,6 @@
-'use strict';
-
 module.exports = (app, options) => {
 
-  app.get('/resource/countries', (req, res, next) => {
+  app.get('resource/countries', (req, res, next) => {
     options.repository.getCountries().then((countries) => {
       res.status(200).send(countries.map((country) => { return {
           name: country.name,
@@ -13,10 +11,10 @@ module.exports = (app, options) => {
     .catch(next);
   });
 
-  app.get('/resource/country/search', (req, res, next) => {
+  app.get('resource/country/search', (req, res, next) => {
 
-    var code = req.query.code;
-    var name = req.query.name;
+    let code = req.query.code;
+    let name = req.query.name;
     if (!code && !name) {
       throw new Error("When searching for a country, the code or name must be specified, e.g: '/search?code=VN', '/search?name=Vietnam'.");
     }

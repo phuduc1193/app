@@ -1,6 +1,4 @@
-'use strict';
-
-var mysql = require('mysql');
+const mysql = require('mysql');
 
 class Repository {
   constructor(connection) {
@@ -53,7 +51,6 @@ class Repository {
   getCountryByName(name) {
     return new Promise((resolve, reject) => {
 
-      //  Fetch the customer.
       this.connection.query('SELECT country_code, country_name FROM apps_countries WHERE country_name LIKE ?', ['%' + name + '%'], (err, results) => {
 
         if(err) {

@@ -12,8 +12,9 @@ WORKDIR /api
 COPY package.json /api
 RUN npm install
 
-COPY . /api
+COPY ./src /api
 
 EXPOSE 3030
 
+CMD ["gulp"]
 CMD ["npm", "start"]

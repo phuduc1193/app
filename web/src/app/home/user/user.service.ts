@@ -29,7 +29,7 @@ export class UserService {
     let params = {
       unique: this.authId()
     };
-    this._authHttp.post(environment.authAPI + 'users/profile', params)
+    this._authHttp.post(environment.apiUrl + 'auth/users/profile', params)
       .map(res => res.json()).subscribe(
         data => {
           if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code == 40410) {
@@ -47,7 +47,7 @@ export class UserService {
     Object.assign(params, {
       unique: this.authId()
     });
-    this._authHttp.post(environment.authAPI + 'users/save', params)
+    this._authHttp.post(environment.apiUrl + 'auth/users/save', params)
       .map(res => res.json()).subscribe(
         data => {
           if (typeof(data) !== 'undefined' && typeof(data.status) !== 'undefined' && data.status.code !== 200)
