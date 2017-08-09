@@ -9,16 +9,89 @@ class Repository {
   getCountries() {
     return new Promise((resolve, reject) => {
 
-      this.connection.query('SELECT country_code, country_name FROM apps_countries', (err, results) => {
+      this.connection.query('SELECT * FROM countries', (err, results) => {
         if(err) {
           return reject(new Error("An error occured getting the countries: " + err));
         }
 
-        resolve((results || []).map((country) => {
-          return {
-            name: country.country_name,
-            code: country.country_code
-          };
+        resolve(results);
+
+      });
+
+    });
+  }
+
+  getCountryByID(id) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM countries WHERE id = ?', [id], (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the country by id: " + err));
+        }
+
+        if(results.length === 0) {
+          resolve(undefined);
+        } else {
+          resolve(results);
+        }
+
+      });
+
+    });
+  }
+
+  getCountriesByCode(code) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM countries WHERE code LIKE ?', ['%' + code + '%'], (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the countries by code: " + err));
+        }
+
+        if(results.length === 0) {
+          resolve(undefined);
+        } else {
+          resolve(results);
+        }
+
+      });
+
+    });
+  }
+
+  getCountriesByName(name) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM countries WHERE name LIKE ?', ['%' + name + '%'], (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the countries by name: " + err));
+        }
+
+        if(results.length === 0) {
+          resolve(undefined);
+        } else {
+          resolve(results);
+        }
+
+      });
+
+    });
+  }
+
+  getRegions() {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM regions', (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the regions: " + err));
+        }
+
+        resolve((results || []).map((results) => {
+          return results;
         }));
 
       });
@@ -26,22 +99,19 @@ class Repository {
     });
   }
 
-  getCountryByCode(code) {
+  getRegionByID(id) {
     return new Promise((resolve, reject) => {
 
-      this.connection.query('SELECT country_code, country_name FROM apps_countries WHERE country_code = ?', [code], (err, results) => {
+      this.connection.query('SELECT * FROM regions WHERE id = ?', [id], (err, results) => {
 
         if(err) {
-          return reject(new Error("An error occured getting the country: " + err));
+          return reject(new Error("An error occured getting the region by id: " + err));
         }
 
         if(results.length === 0) {
           resolve(undefined);
         } else {
-          resolve({
-            name: results[0].country_name,
-            code: results[0].country_code
-          });
+          resolve(results);
         }
 
       });
@@ -49,23 +119,123 @@ class Repository {
     });
   }
 
-  getCountryByName(name) {
+  getRegionsByName(name) {
     return new Promise((resolve, reject) => {
 
-      this.connection.query('SELECT country_code, country_name FROM apps_countries WHERE country_name LIKE ?', ['%' + name + '%'], (err, results) => {
+      this.connection.query('SELECT * FROM regions WHERE name LIKE ?', ['%' + name + '%'], (err, results) => {
 
         if(err) {
-          return reject(new Error("An error occured getting the country: " + err));
+          return reject(new Error("An error occured getting the regions by name: " + err));
         }
 
         if(results.length === 0) {
           resolve(undefined);
         } else {
-          resolve({
-            name: results[0].country_name,
-            code: results[0].country_code
-          });
+          resolve(results);
         }
+
+      });
+
+    });
+  }
+
+  getRegionsByCountryID(countryID) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM regions WHERE country_id = ?', [countryID], (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the regions by country: " + err));
+        }
+
+        resolve(results);
+
+      });
+
+    });
+  }
+
+  getCities(pageSize, pageNumber) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM cities LIMIT ?, ?', [(pageNumber - 1) * pageSize, pageNumber * pageSize ],  (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the cities: " + err));
+        }
+
+        resolve((results || []).map((results) => {
+          return results;
+        }));
+
+      });
+
+    });
+  }
+
+  getCityByID(id) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM cities WHERE id = ?', [id], (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the city by id: " + err));
+        }
+
+        if(results.length === 0) {
+          resolve(undefined);
+        } else {
+          resolve(results);
+        }
+
+      });
+
+    });
+  }
+
+  getCitiesByName(name) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM cities WHERE name LIKE ?', ['%' + name + '%'], (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the cities by name: " + err));
+        }
+
+        if(results.length === 0) {
+          resolve(undefined);
+        } else {
+          resolve(results);
+        }
+
+      });
+
+    });
+  }
+
+  getCitiesByCountryID(countryID) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM cities WHERE country_id = ?', [countryID], (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the cities by country: " + err));
+        }
+
+        resolve(results);
+
+      });
+
+    });
+  }
+
+  getCitiesByRegionID(regionID) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM cities WHERE region_id = ?', [regionID], (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the cities by country: " + err));
+        }
+
+        resolve(results);
 
       });
 
@@ -75,15 +245,13 @@ class Repository {
   getPhoneTypes() {
     return new Promise((resolve, reject) => {
 
-      this.connection.query('SELECT type FROM apps_phone_types', (err, results) => {
+      this.connection.query('SELECT * FROM phone_types', (err, results) => {
         if(err) {
           return reject(new Error("An error occured getting the phone types: " + err));
         }
 
         resolve((results || []).map((phoneType) => {
-          return {
-            name: phoneType.type
-          };
+          return phoneType;
         }));
 
       });
@@ -94,15 +262,13 @@ class Repository {
   getGenders() {
     return new Promise((resolve, reject) => {
 
-      this.connection.query('SELECT gender FROM apps_genders', (err, results) => {
+      this.connection.query('SELECT * FROM genders', (err, results) => {
         if(err) {
           return reject(new Error("An error occured getting the genders: " + err));
         }
 
         resolve((results || []).map((gender) => {
-          return {
-            name: gender.gender
-          };
+          return gender;
         }));
 
       });
@@ -113,7 +279,7 @@ class Repository {
   getRelationshipStatus() {
     return new Promise((resolve, reject) => {
 
-      this.connection.query('SELECT status, preposition, mark FROM apps_relationship_status', (err, results) => {
+      this.connection.query('SELECT * FROM relationship_status', (err, results) => {
         if(err) {
           return reject(new Error("An error occured getting the relationship status: " + err));
         }

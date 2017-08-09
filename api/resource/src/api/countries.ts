@@ -1,17 +1,23 @@
 module.exports = (app, options) => {
 
-  app.get('resource/countries', (req, res, next) => {
+  app.get('/resource/country', (req, res, next) => {
     options.repository.getCountries().then((countries) => {
-      res.status(200).send(countries.map((country) => { return {
-          name: country.name,
-          code: country.code
-        };
-      }));
+      res.status(200).send(countries);
     })
     .catch(next);
   });
 
-  app.get('resource/country/search', (req, res, next) => {
+  app.get('/resource/country/:id(\\d+)', (req, res, next) => {
+
+    let id = req.params.id;
+
+    options.repository.getCountryByID(id).then((country) => {
+      res.status(200).send(country);
+    })
+    .catch(next);
+  });
+
+  app.get('/resource/country/search', (req, res, next) => {
 
     let code = req.query.code;
     let name = req.query.name;
@@ -20,15 +26,12 @@ module.exports = (app, options) => {
     }
 
     if (code){
-      options.repository.getCountryByCode(code).then((country) => {
+      options.repository.getCountriesByCode(code).then((country) => {
 
         if(!country) { 
           res.status(404).send('Country not found.');
         } else {
-          res.status(200).send({
-            name: country.name,
-            code: country.code
-          });
+          res.status(200).send(country);
         }
 
       })
@@ -36,19 +39,18 @@ module.exports = (app, options) => {
     }
 
     if (name) {
-      options.repository.getCountryByName(name).then((country) => {
+      options.repository.getCountriesByName(name).then((country) => {
 
         if(!country) { 
           res.status(404).send('Country not found.');
         } else {
-          res.status(200).send({
-            name: country.name,
-            code: country.code
-          });
+          res.status(200).send(country);
         }
 
       })
       .catch(next);
     }
+
   });
+
 };

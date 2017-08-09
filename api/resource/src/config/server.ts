@@ -12,6 +12,8 @@ module.exports.start = (options) => {
     app.use(cors());
 
     require('../api/countries')(app, options);
+    require('../api/regions')(app, options);
+    require('../api/cities')(app, options);
     require('../api/common')(app, options);
 
     const server = app.listen(options.port, () => {

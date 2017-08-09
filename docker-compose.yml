@@ -29,12 +29,24 @@ services:
     build: ./api/mongo-api
     volumes:
       - ./api/mongo-api/db:/data/db/
-  resource:
+  resource01:
     build: ./api/resource
     links:
       - resourcedb
     volumes:
-      - ./api/resource:/api
+      - ./api/resource/dist:/api/dist
+  resource02:
+    build: ./api/resource
+    links:
+      - resourcedb
+    volumes:
+      - ./api/resource/dist:/api/dist
+  resource03:
+    build: ./api/resource
+    links:
+      - resourcedb
+    volumes:
+      - ./api/resource/dist:/api/dist
   resourcedb:
     build: ./api/resource/resourcedb
     volumes:

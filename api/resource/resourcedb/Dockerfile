@@ -6,3 +6,4 @@ ENV MYSQL_USER user
 ENV MYSQL_PASSWORD qwerty12345
 
 ADD setup.sql /docker-entrypoint-initdb.d
+ADD world.sql /docker-entrypoint-initdb.d
