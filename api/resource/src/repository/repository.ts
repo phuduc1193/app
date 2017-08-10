@@ -139,12 +139,62 @@ class Repository {
     });
   }
 
+  getRegionsByCode(code) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM regions WHERE code LIKE ?', ['%' + code + '%'], (err, results) => {
+
+        if(err) {
+          return reject(new Error("An error occured getting the regions by code: " + err));
+        }
+
+        if(results.length === 0) {
+          resolve(undefined);
+        } else {
+          resolve(results);
+        }
+
+      });
+
+    });
+  }
+
   getRegionsByCountryID(countryID) {
     return new Promise((resolve, reject) => {
 
       this.connection.query('SELECT * FROM regions WHERE country_id = ?', [countryID], (err, results) => {
         if(err) {
           return reject(new Error("An error occured getting the regions by country: " + err));
+        }
+
+        resolve(results);
+
+      });
+
+    });
+  }
+  
+  getRegionsByCountryByCode(countryID, code) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM regions WHERE country_id = ? AND code LIKE ?', [countryID, '%' + code + '%'], (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the regions by country and code: " + err));
+        }
+
+        resolve(results);
+
+      });
+
+    });
+  }
+
+  getRegionsByCountryByName(countryID, name) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM regions WHERE country_id = ? AND name LIKE ?', [countryID, '%' + name + '%'], (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the regions by country and name: " + err));
         }
 
         resolve(results);
@@ -233,6 +283,21 @@ class Repository {
       this.connection.query('SELECT * FROM cities WHERE region_id = ?', [regionID], (err, results) => {
         if(err) {
           return reject(new Error("An error occured getting the cities by country: " + err));
+        }
+
+        resolve(results);
+
+      });
+
+    });
+  }
+
+  getCitiesByRegionByName(regionID, name) {
+    return new Promise((resolve, reject) => {
+
+      this.connection.query('SELECT * FROM cities WHERE region_id = ? AND name LIKE ?', [regionID, '%' + name + '%'], (err, results) => {
+        if(err) {
+          return reject(new Error("An error occured getting the cities by region and name: " + err));
         }
 
         resolve(results);

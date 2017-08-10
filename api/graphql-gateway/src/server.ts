@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as graphqlHTTP from 'express-graphql';
 import * as bodyParser from 'body-parser';
-import * as schema from './schema';
+import * as schema from './api/countries';
 
 class Server {
 

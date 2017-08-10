@@ -1,6 +1,7 @@
 FROM node:8.2.1-alpine
 
-ENV API_URL=127.0.0.1:3000/api
+ENV PORT=4000
+ENV API_URL=http://api-gateway:3000/api
 ENV DATABASE_URL=mongodb://api-db:27017
 ENV TOKEN_SECRET=qwert1234
 
@@ -13,7 +14,7 @@ COPY . /api
 RUN yarn
 RUN yarn global add gulp
 
-EXPOSE 3000
+EXPOSE 4000
 
 RUN gulp scripts
 CMD ["npm", "start"]

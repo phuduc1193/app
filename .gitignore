@@ -37,3 +37,4 @@ web/package-lock.json
 
 /api/graphql-gateway/node_modules
 /api/graphql-gateway/dist
+/api/resource/resourcedb/world.sql

@@ -22,7 +22,7 @@ module.exports = (app, options) => {
     let code = req.query.code;
     let name = req.query.name;
     if (!code && !name) {
-      throw new Error("When searching for a country, the code or name must be specified, e.g: '/search?code=VN', '/search?name=Vietnam'.");
+      throw new Error("When searching for a country, the code or name must be specified, e.g: '/search?code=US', '/search?name=America'.");
     }
 
     if (code){

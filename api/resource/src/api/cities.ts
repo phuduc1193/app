@@ -79,9 +79,38 @@ module.exports = (app, options) => {
 
   });
 
+  app.get('/resource/region/:id(\\d+)/city/search', (req, res, next) => {
+
+    let regionID = req.params.id;
+    let name = req.query.name;
+
+    if (!regionID) {
+      throw new Error("When searching for cities within an region, the id of that region should be specified.");
+    }
+    
+    if (!name) {
+      throw new Error("When searching for a city, the name must be specified, e.g: '/search?name=new york'.");
+    }
+
+    if (regionID && name){
+      options.repository.getCitiesByRegionByName(regionID, name).then((cities) => {
+
+        if(!cities) { 
+          res.status(404).send('City not found.');
+        } else {
+          res.status(200).send(cities);
+        }
+
+      })
+      .catch(next);
+    }
+
+  });
+
   app.get('/resource/city/search', (req, res, next) => {
 
     let name = req.query.name;
+
     if (!name) {
       throw new Error("When searching for a city, the name must be specified, e.g: '/search?name=new york'.");
     }
