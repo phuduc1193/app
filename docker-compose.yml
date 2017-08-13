@@ -5,60 +5,18 @@ services:
     ports:
       - "80:80"
     links:
-      - api-gateway
-  api-gateway:
-    build: ./api-gateway
+      - api.gateway
+  api.gateway:
+    build: ./api/proxy
     ports:
       - "3000:3000"
-    links:
-      - auth01
-      - auth02
-      - resource01
-      - resource02
-      - resource03
-  graphql-server:
-    build: ./api/graphql-gateway
-    ports:
-      - "4000:4000"
-    links:
-      - api-gateway
-    volumes:
-      - ./api/graphql-gateway/dist:/api/dist
-  auth01:
-    build: ./api/auth
-    links:
-      - api-db
-    volumes:
-      - ./api/auth:/api
-  auth02:
-    build: ./api/auth
-    links:
-      - api-db
-    volumes:
-      - ./api/auth:/api
-  api-db:
-    build: ./api/mongo-api
-    volumes:
-      - ./api/mongo-api/db:/data/db/
-  resource01:
+  api.resource:
     build: ./api/resource
     links:
-      - resourcedb
+      - db.mysql
     volumes:
-      - ./api/resource/dist:/api/dist
-  resource02:
-    build: ./api/resource
-    links:
-      - resourcedb
+      - ./api/resource:/api
+  db.mongo:
+    build: ./db/mongo
     volumes:
-      - ./api/resource/dist:/api/dist
-  resource03:
-    build: ./api/resource
-    links:
-      - resourcedb
-    volumes:
-      - ./api/resource/dist:/api/dist
-  resourcedb:
-    build: ./api/resource/resourcedb
-    volumes:
-      - ./api/resource/resourcedb/db:/var/lib/mysql
+      - ./db/mongo/data:/data/db/
