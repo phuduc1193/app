@@ -26,15 +26,5 @@
 /web/.DS_Store
 /web/Thumbs.db
 
-/api/auth/node_modules
-/api/mongo-api/db/*
-
 /api/resource/node_modules
-/api/resource/resourcedb/db/*
 /api/resource/dist
-web/package-lock.json
-/api/message/node_modules
-
-/api/graphql-gateway/node_modules
-/api/graphql-gateway/dist
-/api/resource/resourcedb/world.sql

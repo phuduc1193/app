@@ -1,6 +1,5 @@
-var server = require('./config/server');
-var config = require('./config/config');
-var repository = require('./repository/repository');
+import connect from './model';
+import start from './server';
 
 process.on('uncaughtException', function(err) {  
   console.error('Unhandled Exception', err);
@@ -9,23 +8,19 @@ process.on('unhandledRejection', function(err, promise){
   console.error('Unhandled Rejection', err);
 });
 
-repository.connect({  
-  host: config.db.host,
-  database: config.db.database,
-  user: config.db.user,
-  password: config.db.password,
-  port: config.db.port
-}).then((repo) => {
+const connectionString ='postgres://postgres:'+ process.env.DATABASE_PASSWORD +'@'+ process.env.DATABASE_HOST +'/postgres';
+
+connect(connectionString).then((dbConnection) => {
   console.log("Connected. Starting server...");
 
-  return server.start({
-    port: config.port,
-    repository: repo
+  return start({
+    port: process.env.PORT,
+    db: dbConnection
   });
 
 }).then((app) => {
-  console.log("Server started successfully, running on port " + config.port + ".");
+  console.log("Server started successfully, running on port " + process.env.PORT + ".");
   app.on('close', () => {
-    repository.disconnect();
+    app.db.disconnect();
   });
 });

@@ -6,17 +6,33 @@ services:
       - "80:80"
     links:
       - api.gateway
+
   api.gateway:
-    build: ./api/proxy
+    build: ./api/gateway
     ports:
       - "3000:3000"
+    depends_on:
+      - api.resource
+    links:
+      - api.resource
   api.resource:
     build: ./api/resource
+    depends_on:
+      - db.postgres
     links:
-      - db.mysql
-    volumes:
-      - ./api/resource:/api
+      - db.postgres
+    expose:
+      - "4000"
+    environment:
+      PORT: 4000
+      DATABASE_PASSWORD: example
+      DATABASE_HOST: db.postgres:5432
+
   db.mongo:
-    build: ./db/mongo
-    volumes:
-      - ./db/mongo/data:/data/db/
+    image: mongo:3.4
+  db.postgres:
+    image: postgres:10-alpine
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: example

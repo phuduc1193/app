@@ -1,5 +1,0 @@
-FROM mongo:3.4
-
-EXPOSE 27017
-
-CMD ["mongod"]

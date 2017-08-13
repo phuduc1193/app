@@ -11,8 +11,10 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.3",
-    "mysql": "^2.14.0",
+    "pg": "^7.1.2",
+    "pg-hstore": "^2.3.2",
     "nodemon": "^1.11.0",
+    "sequelize": "^4.4.3",
     "gulp": "^3.9.1"
   },
   "devDependencies": {
