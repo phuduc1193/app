@@ -15,7 +15,7 @@ let PhoneType = {
   args: {
     name: { type: GraphQLString, description: 'Optional phone type name for searching.' }
   },
-  resolve: (_, args) => { return Resolvers.relationshipStatus(_, args); }
+  resolve: (_, args) => { return Resolvers.phoneType(_, args); }
 }
 
 export default PhoneType;
