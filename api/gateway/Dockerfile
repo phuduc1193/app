@@ -1,7 +1,13 @@
-FROM nginx:1.13-alpine
+FROM node:8.2.1-alpine
 
-COPY default.conf /etc/nginx/conf.d/
+RUN mkdir /api
+WORKDIR /api
 
-EXPOSE 3000
+COPY package.json /api
+COPY . /api
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN yarn
+RUN yarn global add gulp
+
+RUN gulp scripts
+CMD ["npm", "start"]

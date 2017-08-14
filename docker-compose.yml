@@ -5,26 +5,54 @@ services:
     ports:
       - "80:80"
   
-  api.graphql:
-    build: ./api/graphql-server
+  api.gateway:
+    build: ./api/gateway
     depends_on:
-      - api.gateway
+      - api.proxy
     links:
-      - api.gateway
+      - api.proxy
     ports:
       - "3000:3000"
     environment:
       PORT: 3000
-      API_URL: http://api.gateway:3000/api
-  api.gateway:
-    build: ./api/gateway
+      API_URL: http://api.proxy:3000/api
+  api.proxy:
+    build: ./api/proxy
     expose:
       - "3000"
     depends_on:
-      - api.resource
+      - api.resource1
+      - api.resource2
+      - api.resource3
     links:
-      - api.resource
-  api.resource:
+      - api.resource1
+      - api.resource2
+      - api.resource3
+  api.resource1:
+    build: ./api/resource
+    depends_on:
+      - db.postgres
+    links:
+      - db.postgres
+    expose:
+      - "4000"
+    environment:
+      PORT: 4000
+      DATABASE_PASSWORD: example
+      DATABASE_HOST: db.postgres:5432
+  api.resource2:
+    build: ./api/resource
+    depends_on:
+      - db.postgres
+    links:
+      - db.postgres
+    expose:
+      - "4000"
+    environment:
+      PORT: 4000
+      DATABASE_PASSWORD: example
+      DATABASE_HOST: db.postgres:5432
+  api.resource3:
     build: ./api/resource
     depends_on:
       - db.postgres
