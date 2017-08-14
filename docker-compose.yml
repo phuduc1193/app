@@ -4,13 +4,22 @@ services:
     build: ./web
     ports:
       - "80:80"
+  
+  api.graphql:
+    build: ./api/graphql-server
+    depends_on:
+      - api.gateway
     links:
       - api.gateway
-
-  api.gateway:
-    build: ./api/gateway
     ports:
       - "3000:3000"
+    environment:
+      PORT: 3000
+      API_URL: http://api.gateway:3000/api
+  api.gateway:
+    build: ./api/gateway
+    expose:
+      - "3000"
     depends_on:
       - api.resource
     links:

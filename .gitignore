@@ -26,5 +26,5 @@
 /web/.DS_Store
 /web/Thumbs.db
 
-/api/resource/node_modules
-/api/resource/dist
+/api/*/node_modules
+/api/*/dist
