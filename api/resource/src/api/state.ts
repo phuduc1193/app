@@ -1,9 +1,9 @@
 module.exports = (app, db) => {
   app.get('/state',function(req, res, next){
-    const State = db.models.State;
+    const State = db.models.state;
     State.findAll({
       order: [
-        ['CountryId', 'ASC'],
+        ['countryId', 'ASC'],
         ['id', 'ASC']
       ]
     }).then(states => {
@@ -12,10 +12,9 @@ module.exports = (app, db) => {
   });
 
   app.get('/country/:countryId/state',function(req, res, next){
-    const countryId = req.params.countryId;
-    const State = db.models.State;
+    const State = db.models.state;
     State.findAll({
-      where: { CountryId: countryId },
+      where: { countryId: req.params.countryId },
       order: [
         ['id', 'ASC']
       ]
@@ -25,9 +24,8 @@ module.exports = (app, db) => {
   });
 
   app.get('state/:id',function(req, res, next){
-    const id = req.params.id;
-    const State = db.models.State;
-    State.findById(id).then(state => {
+    const State = db.models.state;
+    State.findById(req.params.id).then(state => {
       res.status(200).json(state);
     })
   });

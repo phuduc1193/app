@@ -1,6 +1,6 @@
 module.exports = (app, db) => {
   app.get('/country',function(req, res, next){
-    const Country = db.models.Country;
+    const Country = db.models.country;
     Country.findAll({
       order: [
         ['id', 'ASC']
@@ -11,9 +11,8 @@ module.exports = (app, db) => {
   });
 
   app.get('/country/:id',function(req, res, next){
-    const countryId = req.params.id;
-    const Country = db.models.Country;
-    Country.findById(countryId).then(country => {
+    const Country = db.models.country;
+    Country.findById(req.params.id).then(country => {
       res.status(200).json(country);
     });
   });
