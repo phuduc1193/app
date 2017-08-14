@@ -3,7 +3,7 @@ import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as graphqlHTTP from 'express-graphql';
 
-import graphQLSchema from './schema/schema';
+import graphQLSchema from './schema';
 
 const start = (options) => {
 

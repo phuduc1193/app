@@ -47,8 +47,48 @@ const state = (_, args) => {
   });
 };
 
+const phoneType = (_, args) => {
+  return axios.get(process.env.API_URL + '/resource/phonetype')
+  .then(response => {
+    var data = response.data;
+    if (args.name)
+      return lodash.filter(data, (item: any) => {
+        return item.name.toLowerCase().indexOf(args.name.toLowerCase()) > -1;
+      });
+
+    return data;
+  });
+};
+
+const gender = (_, args) => {
+  return axios.get(process.env.API_URL + '/resource/gender')
+  .then(response => {
+    var data = response.data;
+    if (args.name)
+      return lodash.filter(data, (item: any) => {
+        return item.name.toLowerCase().indexOf(args.name.toLowerCase()) > -1;
+      });
+
+    return data;
+  });
+};
+
+const relationshipStatus = (_, args) => {
+  return axios.get(process.env.API_URL + '/resource/relationshipstatus')
+  .then(response => {
+    var data = response.data;
+    if (args.name)
+      return lodash.filter(data, (item: any) => {
+        return item.name.toLowerCase().indexOf(args.name.toLowerCase()) > -1;
+      });
+
+    return data;
+  });
+};
+
 export default {
-  country, state
+  country, state,
+  phoneType, gender, relationshipStatus
 }
 
 

@@ -21,8 +21,8 @@ var start = (options): any => {
 		require('./routes/country')(app, sequelize);
 		require('./routes/state')(app, sequelize);
 		require('./routes/gender')(app, sequelize);
-		require('./routes/phonetype')(app, sequelize);
-		require('./routes/relationshipstatus')(app, sequelize);
+		require('./routes/phone.type')(app, sequelize);
+		require('./routes/relationship.status')(app, sequelize);
 
 		const server = app.listen(options.port, () => {
 			resolve(server);
