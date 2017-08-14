@@ -18,8 +18,11 @@ var start = (options): any => {
 
 		const sequelize = options.db.sequelize();
 
-		require('./api/country')(app, sequelize);
-		require('./api/state')(app, sequelize);
+		require('./routes/country')(app, sequelize);
+		require('./routes/state')(app, sequelize);
+		require('./routes/gender')(app, sequelize);
+		require('./routes/phonetype')(app, sequelize);
+		require('./routes/relationshipstatus')(app, sequelize);
 
 		const server = app.listen(options.port, () => {
 			resolve(server);

@@ -2,6 +2,9 @@ var seed = (models) => {
 
   const Country = models.country;
   const State = models.state;
+  const PhoneType = models.phoneType;
+  const RelationshipStatus = models.relationshipStatus;
+  const Gender = models.gender;
 
   Country.sync({force: true}).then(() => {
     State.sync({force: true}).then(() => {
@@ -307,6 +310,32 @@ var seed = (models) => {
         ]);
       });
     });
+  });
+
+  PhoneType.sync({force: true}).then(() => {
+    PhoneType.bulkCreate([
+      {name: 'Home'}, {name: 'Mobile'}, {name: 'Work'}, {name: 'Other'}
+    ]);
+  });
+
+  Gender.sync({force: true}).then(() => {
+    Gender.bulkCreate([
+      {name: 'Female'}, {name: 'Male'}
+    ]);
+  });
+
+  RelationshipStatus.sync({force: true}).then(() => {
+    RelationshipStatus.bulkCreate([
+      {name: 'Single', preposition: null, mark: null},
+      {name: 'In a relationship', preposition: 'With', mark: 'Anniversary'},
+      {name: 'Engaged', preposition: 'To', mark: 'Since'},
+      {name: 'Married', preposition: 'To', mark: 'Anniversary'},
+      {name: "It's complicated", preposition: 'With', mark: 'Since'},
+      {name: 'In open relationship', preposition: 'With', mark: 'Anniversary'},
+      {name: 'Separated', preposition: null, mark: 'Since'},
+      {name: 'Divorced', preposition: null, mark: 'Since'},
+      {name: 'Widowed', preposition: null, mark: 'Since'}
+    ]);
   });
 
   return models;
