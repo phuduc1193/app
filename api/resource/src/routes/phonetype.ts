@@ -6,14 +6,14 @@ module.exports = (app, db) => {
         ['id', 'ASC']
       ]
     }).then(phoneType => {
-      res.status(200).json(phoneType);
+      return res.status(200).json(phoneType);
     });
   });
 
   app.get('/phonetype/:id',function(req, res, next){
     const PhoneType = db.models.phoneType;
     PhoneType.findById(req.params.id).then(phoneType => {
-      res.status(200).json(phoneType);
+      return res.status(200).json(phoneType);
     });
   });
 

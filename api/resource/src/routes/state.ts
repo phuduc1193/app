@@ -7,7 +7,7 @@ module.exports = (app, db) => {
         ['id', 'ASC']
       ]
     }).then(states => {
-      res.status(200).json(states);
+      return res.status(200).json(states);
     });
   });
 
@@ -19,7 +19,7 @@ module.exports = (app, db) => {
         ['id', 'ASC']
       ]
     }).then(states => {
-      res.status(200).json(states);
+      return res.status(200).json(states);
     });
   });
 

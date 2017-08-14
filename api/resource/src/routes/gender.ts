@@ -6,14 +6,14 @@ module.exports = (app, db) => {
         ['id', 'ASC']
       ]
     }).then(genders => {
-      res.status(200).json(genders);
+      return res.status(200).json(genders);
     });
   });
 
   app.get('/gender/:id',function(req, res, next){
     const Gender = db.models.gender;
     Gender.findById(req.params.id).then(gender => {
-      res.status(200).json(gender);
+      return res.status(200).json(gender);
     });
   });
 
