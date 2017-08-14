@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import * as fs from 'fs';
 import * as path from 'path';
-// import seed from './seed';
+import seed from './seed';
 
 class DbConnection {
 
@@ -56,8 +56,7 @@ const setup = (sequelize) => {
     }
   });
 
-  // return seed(db);
-  return db;
+  return seed(db);
 };
 
 export default connect;

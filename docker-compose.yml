@@ -73,3 +73,15 @@ services:
       - "5432"
     environment:
       POSTGRES_PASSWORD: example
+  db.seed:
+    build: ./db/seed
+    depends_on:
+      - db.postgres
+    links:
+      - db.postgres
+    expose:
+      - "4000"
+    environment:
+      PORT: 4000
+      DATABASE_PASSWORD: example
+      DATABASE_HOST: db.postgres:5432
