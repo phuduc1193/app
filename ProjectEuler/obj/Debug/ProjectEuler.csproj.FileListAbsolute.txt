@@ -1,0 +1,6 @@
+D:\Workspace\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.dll
+D:\Workspace\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.pdb
+D:\Workspace\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.csprojResolveAssemblyReference.cache
+D:\Workspace\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.csproj.CoreCompileInputs.cache
+D:\Workspace\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.dll
+D:\Workspace\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.pdb
