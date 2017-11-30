@@ -1,8 +1,15 @@
 version: '3'
 
 services:
+  proxy:
+    image: proxy
+    build:
+      context: ./Proxy
+      dockerfile: Dockerfile
   webapplication:
     image: webapplication
     build:
       context: ./WebApplication
       dockerfile: Dockerfile
+  db:
+    image: "microsoft/mssql-server-linux"

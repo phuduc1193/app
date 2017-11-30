@@ -1,8 +1,15 @@
 version: '3'
 
 services:
+  proxy:
+    ports:
+      - "80:80"
   webapplication:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
+  db:
+    environment:
+      SA_PASSWORD: "7XAgKR!MWa7bvfX6"
+      ACCEPT_EULA: "Y"
