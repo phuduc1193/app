@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebApplication.Data;
 using WebApplication.Models;
 using WebApplication.Services;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace WebApplication
 {
@@ -47,6 +48,10 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
             }
             else
             {
