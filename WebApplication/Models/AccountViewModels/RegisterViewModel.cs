@@ -9,6 +9,11 @@ namespace WebApplication.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
+        [RegularExpression(@"^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$", ErrorMessage = "Invalid {0}.")]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

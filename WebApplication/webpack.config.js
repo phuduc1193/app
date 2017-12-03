@@ -1,12 +1,13 @@
-﻿const path = require('path');
+﻿/// <binding BeforeBuild='Watch - Development' />
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: { 'main-client': './Client/app.js' },
+    entry: { 'bundle': './Client/app.js' },
     output: {
         path: path.resolve(__dirname, './wwwroot/dist'),
         publicPath: '/dist/',
-        filename: 'main-client.js'
+        filename: 'bundle.js'
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -20,7 +21,7 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: 'vue-loader'
             },
             {
                 test: /\.js$/,
@@ -29,8 +30,8 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: ['style-loader', 'css-loader']
             }
         ]
     }
-}
+};

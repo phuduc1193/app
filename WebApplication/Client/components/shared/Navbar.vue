@@ -25,7 +25,18 @@
           </li>
         </ul>
 
-        @await Html.PartialAsync("_LoginPartial")
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <router-link :to="{ name: 'register-account' }" class="nav-link">
+              Register
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'login-account' }" class="nav-link">
+              Login
+            </router-link>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>
